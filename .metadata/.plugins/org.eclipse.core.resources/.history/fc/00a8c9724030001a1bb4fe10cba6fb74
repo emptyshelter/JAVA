@@ -1,0 +1,104 @@
+package client;
+
+import java.awt.BorderLayout;
+import java.awt.EventQueue;
+
+import javax.print.attribute.standard.Severity;
+import javax.swing.JFrame;
+import javax.swing.JPanel;
+import javax.swing.border.EmptyBorder;
+import javax.swing.JTextField;
+import javax.swing.JTextArea;
+import javax.swing.JScrollBar;
+import javax.swing.JScrollPane;
+import java.awt.event.ActionListener;
+import java.io.BufferedReader;
+import java.io.IOException;
+import java.io.InputStreamReader;
+import java.io.OutputStream;
+import java.io.OutputStreamWriter;
+import java.io.PrintWriter;
+import java.net.Socket;
+import java.awt.event.ActionEvent;
+
+public class EchoClientFrame extends JFrame {
+
+	private JPanel contentPane;
+	private JTextField echoTF;
+	private JTextArea displayTA;
+
+	/**
+	 * Launch the application.
+	 */
+	public static void main(String[] args) {
+		EventQueue.invokeLater(new Runnable() {
+			public void run() {
+				try {
+					EchoClientFrame frame = new EchoClientFrame();
+					frame.setVisible(true);
+					frame.echoTF.requestFocus();				
+				} catch (Exception e) {
+					e.printStackTrace();
+				}
+			}
+		});
+	}
+
+	/**
+	 * Create the frame.
+	 */
+	public EchoClientFrame() {
+		setTitle("EchoClientFrame");
+		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+		setBounds(100, 100, 450, 300);
+		contentPane = new JPanel();
+		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
+		contentPane.setLayout(new BorderLayout(0, 0));
+		setContentPane(contentPane);
+		
+		echoTF = new JTextField();
+		echoTF.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				try {
+					String echoStr = echoTF.getText();
+					if (echoStr==null || echoStr.equals("")) {
+						echoTF.requestFocus();
+						return;
+					}
+					Socket socket =new Socket("192.168.15.31",9999);
+					/*
+					 * 서버로 전송(OutputStream)
+					 */
+					OutputStream out = socket.getOutputStream();
+					OutputStreamWriter osw = new OutputStreamWriter(out);
+					PrintWriter pw = new PrintWriter(osw,true);
+					pw.println(echoStr);
+					pw.flush();
+					echoTF.setText("");
+					echoTF.requestFocus();
+					/*
+					 * 서버로 전송되는 데이터 읽기(InputStream)
+					 */
+					BufferedReader br = 
+							new BufferedReader(
+									new InputStreamReader(
+											socket.getInputStream()));
+					String serverEchoStr= br.readLine();
+					displayTA.append(serverEchoStr+"\n");
+				} catch (Exception e1) {
+					
+				}
+			}
+		});
+		contentPane.add(echoTF, BorderLayout.SOUTH);
+		echoTF.setColumns(10);
+		
+		JScrollPane scrollPane = new JScrollPane();
+		contentPane.add(scrollPane, BorderLayout.CENTER);
+		
+		displayTA = new JTextArea();
+		displayTA.setEditable(false);
+		scrollPane.setViewportView(displayTA);
+	}
+
+}

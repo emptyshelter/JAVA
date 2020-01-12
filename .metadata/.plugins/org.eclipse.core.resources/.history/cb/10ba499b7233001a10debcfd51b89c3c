@@ -1,0 +1,12 @@
+package dao.dept;
+
+public class EmpDaoTestMain {
+
+	public static void main(String[] args) {
+		EmpDao empDao = new EmpDaoImpl();
+		empDao.findEmpsWithDept();
+		
+
+	}
+
+}

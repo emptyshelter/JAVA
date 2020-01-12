@@ -1,0 +1,7 @@
+package layout;
+
+import java.awt.Frame;
+
+public class Chatting extends Frame {
+
+}

@@ -1,0 +1,10 @@
+package dao.address;
+
+public class AddressSQL {
+	public static final String ADDRESS_INSERT="";
+	public static final String ADDRESS_DELETE="";
+	public static final String ADDRESS_UPDATE="";
+	public static final String ADDRESS_SELECT_PK="";
+	public static final String ADDRESS_SELECTALL="";
+	
+}

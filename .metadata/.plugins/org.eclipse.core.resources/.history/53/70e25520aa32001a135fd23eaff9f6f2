@@ -1,0 +1,9 @@
+package dao.address;
+
+public class AddressDao1TestMain {
+
+	public static void main(String[] args) {
+
+	}
+
+}

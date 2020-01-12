@@ -1,0 +1,32 @@
+package dao.guest;
+
+import java.util.ArrayList;
+import java.util.Date;
+
+public class GuestDaoTestMain {
+
+	public static void main(String[] args) throws Exception {
+		GuestDaoImpl guest = new GuestDaoImpl();
+		Guest findguest = new Guest();
+		findguest = guest.selectByNo(2);
+		System.out.println(findguest);
+		ArrayList<Guest> guestList = new ArrayList<Guest>();
+		for (Guest guest2 : guestList) {
+			System.out.println(guest2);
+		}
+//		int result = guest.insertGuest(
+//				new Guest(0, "테스트손님", new Date(System.currentTimeMillis()), "test@test.com", "없당~", "모른당~", "모른당~"));
+//		result = guest.insertGuest(
+//				new Guest(0, "테스투", new Date(System.currentTimeMillis()), "test@test.com", "없당~", "모른당~", "모른당~"));
+//		result = guest.insertGuest(
+//				new Guest(0, "지나가는손님", new Date(System.currentTimeMillis()), "test@test.com", "없당~", "모른당~", "모른당~"));
+//		result = guest.insertGuest(
+//				new Guest(0, "진상손님", new Date(System.currentTimeMillis()), "test@test.com", "없당~", "모른당~", "모른당~"));
+//		result = guest.insertGuest(
+//				new Guest(0, "손...님?", new Date(System.currentTimeMillis()), "test@test.com", "없당~", "모른당~", "모른당~"));
+		
+		
+
+	}
+
+}

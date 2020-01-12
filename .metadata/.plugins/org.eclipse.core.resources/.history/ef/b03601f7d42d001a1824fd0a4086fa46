@@ -1,0 +1,27 @@
+package event;
+
+import java.awt.BorderLayout;
+
+import javax.swing.JButton;
+import javax.swing.JFrame;
+
+public class ActionEventJFrame extends JFrame {
+	private JButton southB;
+	
+	public ActionEventJFrame() {
+		this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+		southB=new JButton("ÀÌº¥Æ®½î¾²");
+		this.getContentPane().setLayout(new BorderLayout());
+		this.getContentPane().add(southB,BorderLayout.SOUTH);
+		
+		setSize(300,400);
+		setVisible(true);
+		
+	}
+	
+	public static void main(String[] args) {
+		new ActionEventJFrame();
+
+	}
+
+}

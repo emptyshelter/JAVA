@@ -1,0 +1,33 @@
+package layout;
+
+import java.awt.BorderLayout;
+import java.awt.Color;
+import java.awt.Frame;
+import java.awt.Panel;
+
+public class PanelFrame extends Frame {
+	Panel southP;
+	public PanelFrame() {
+		setLayout(new BorderLayout());
+		
+		southP = new Panel();
+		southP.setBackground(Color.pink);
+		
+		add(southP,BorderLayout.SOUTH)
+		setSize(300, 400);
+		setVisible(true);
+	}
+	
+	
+	
+	
+	
+	
+	
+	
+	public static void main(String[] args) {
+		new PanelFrame();
+	}
+
+
+}

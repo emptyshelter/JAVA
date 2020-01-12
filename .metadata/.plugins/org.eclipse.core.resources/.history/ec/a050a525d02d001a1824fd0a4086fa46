@@ -1,0 +1,25 @@
+package event;
+
+import javax.swing.JButton;
+import javax.swing.JFrame;
+
+public class ActionEventJFrame extends JFrame{
+	private JButton southB;
+	public ActionEventJFrame() {
+		// TODO Auto-generated constructor stub
+	}
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	public static void main(String[] args) {
+		
+	}
+
+}

@@ -1,0 +1,17 @@
+package dao.address;
+
+public class AddressInsertMain {
+
+	public static void main(String[] args) {
+		String driverClass="oracle.jdbc.OracleDriver";
+		String url="jdbc:oracle:thin:@182.237.126.19:1521:XE";
+		String user="javaspring20";
+		String password="javaspring20";
+		
+		
+
+		String insetSql1=
+				"insert into address values(address_no_seq.nextval,'xxx'||address_no_seq.currval,'±Ë∞Ê»£','010-123-4567','∞Ê±‚µµπŒ')";
+	}
+
+}

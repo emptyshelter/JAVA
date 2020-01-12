@@ -1,0 +1,32 @@
+package resultset;
+
+import java.sql.Connection;
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
+import java.sql.SQLException;
+
+import com.itwill.dao.common.ConnectionFactory;
+
+public class ResultSetScrollableUpdatableMain {
+	
+	public static void main(String[] args) throws Exception {
+		String selectSql = "select empno, ename, job, mgr, hiredate, sal, comm, deptno "
+					 	  + "from emp order by empno asc";
+		/*
+		 * ResultSet.TYPE_FORWARD_ONLY DAEFAULT
+		 * ResultSet.CONCUR_READ_ONLY
+		 */
+		Connection con = ConnectionFactory.getConnection();
+		PreparedStatement pstmt = 
+				con.prepareStatement(
+						selectSql,
+						ResultSet.TYPE_SCROLL_SENSITIVE,
+						ResultSet.CONCUR_READ_ONLY);//INSENSITIVE 사용시 업데이트도 가능
+		ResultSet rs = pstmt.executeQuery();
+		while (rs.next()) {
+			
+		}
+		
+	}
+
+}

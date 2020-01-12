@@ -1,0 +1,17 @@
+package dao.address;
+
+public class AddressSQL {
+	String insertSql=
+			"insert into address values(address_no_seq.nextval,?,?,?,?)";
+	public static final String ADDRESS_INSERT="";
+	String deleteSql = "DELETE ADDRESS WHERE no = ?";
+	public static final String ADDRESS_DELETE="";
+	String updateSql =  "UPDATE ADDRESS SET id = ?, name = ?,phone = ?,address = ? where no = ?";
+	public static final String ADDRESS_UPDATE="";
+	String findSql = "select * from address where no =?";
+	public static final String ADDRESS_SELECT_PK="";
+	String findSqlAll = "select * from address";
+	public static final String ADDRESS_SELECT_ALL="";
+	
+	
+}

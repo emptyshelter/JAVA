@@ -1,0 +1,14 @@
+package basic;
+
+public class OracleDriverClassLoadingMain {
+
+	public static void main(String[] args) {
+		String driverClass = "basic.OracleDriver";
+		/*
+		 * 1. basic.OracleDriver class loading
+		 */
+		//Driver driver = new OracleDriver();
+		Class.forName(driverClass);
+	}
+
+}

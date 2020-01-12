@@ -1,0 +1,68 @@
+
+public class OuterClass2 {
+	public int outer_class_member_field;
+	public void outer_class_method1() {
+		ObjectChildInnerClass oci=new ObjectChildInnerClass();
+		System.out.println(oci.toString());
+		InterfaceAImpl aimpl=new InterfaceAImpl();
+		aimpl.method1();
+	}
+	public void outer_class_method2() {
+		Object oc1 = new Object() {
+			@Override
+			public String toString() {
+				return "oc1 -->난 오브젝트 자식클래스이다.[anonymous local inner class]";
+			}
+			public void print() {
+				System.out.println("외부호출불가 메소드");
+			}
+		};//재정의 외에서는 사용하지 않는다.
+		System.out.println(oc1.toString());
+		Object oc2 = new Object() {
+			@Override
+			public String toString() {
+				return "oc2 -->난 오브젝트 자식클래스이다.[anonymous local inner class]";
+			}
+		};//oc2의 타입은 Object의 Child 타입이다.
+		System.out.println(oc2.toString());
+		InterfaceA ia = new InterfaceA() {
+			@Override
+			public void method1() {
+				System.out.println("InterFaceA.method1() 구현:"+this);
+				
+			}
+		}; 
+		ia.method1();
+		InterfaceA ia2 = new InterfaceA() {
+			
+			@Override
+			public void method1() {
+			}
+		};
+	}
+	
+	/**************inner class1****************/
+	public class ObjectChildInnerClass extends Object{
+		@Override
+		public String toString() {
+			// TODO Auto-generated method stub
+			return "난 오브젝트 자식클래스이다.[member inner class]";
+		}
+	}
+	/**************inner class2****************/
+	public class InterfaceAImpl implements InterfaceA{
+
+		@Override
+		public void method1() {
+			System.out.println("InterFaceA.method1() 구현:"+this);
+			
+		}
+		
+	}
+	public static void main(String[] args) {
+		OuterClass2 oc2=new OuterClass2();
+		oc2.outer_class_method1();
+		oc2.outer_class_method2();
+	}
+	
+}

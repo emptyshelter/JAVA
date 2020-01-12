@@ -1,0 +1,12 @@
+
+public class OutterClassMain {
+	public static void main(String[] args) {
+		OutterClass oc = new OutterClass();
+		oc.outer_member_field=9090;
+		oc.outer_member_method();
+		OutterClass.InnerClass ic = oc.new InnerClass();
+		ic.inner_member_field=3443;
+		
+	}
+
+}

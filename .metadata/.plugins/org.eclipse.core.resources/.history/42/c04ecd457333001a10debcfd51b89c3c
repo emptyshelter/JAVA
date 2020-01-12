@@ -1,0 +1,51 @@
+package dao.dept;
+
+import java.sql.Connection;
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
+import java.util.List;
+
+import com.itwill.dao.common.ConnectionFactory;
+
+public class EmpDaoImpl implements EmpDao{
+
+	@Override
+	public int insert(Emp emp) throws Exception {
+		return 0;
+	}
+
+	@Override
+	public int update(Emp emp) throws Exception {
+		return 0;
+	}
+
+	@Override
+	public int delete(int empno) throws Exception {
+		return 0;
+	}
+
+	@Override
+	public Emp findByEmpno(int empno) throws Exception {
+		return null;
+	}
+
+	@Override
+	public List<Emp> findByDeptno(int deptno) throws Exception {
+		return null;
+	}
+
+	@Override
+	public List findEmpsWithDept() throws Exception {
+		Connection con = null;
+		PreparedStatement pstmt = null;
+		ResultSet rs = null;
+		con= ConnectionFactory.getConnection();
+		pstmt = con.prepareStatement(EmpSQL.SELECT_ALLEMP_WITHDEPT);
+		rs= pstmt.executeQuery();
+		while (rs.next()) {
+			System.out.println(rs.getInt("empno"));
+		}
+		return null;
+	}
+
+}

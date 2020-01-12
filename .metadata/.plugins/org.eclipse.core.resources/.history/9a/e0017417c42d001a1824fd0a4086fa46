@@ -1,0 +1,16 @@
+
+public class OuterClass {
+	public int outer_member_field;
+	public void outer_member_method() {
+		System.out.println("outer_member_method()");
+	}
+	/*******************Nested Class************************/
+	public class InnerClass{
+		public int inner_member_field;
+		public void inner_member_method(){
+			System.out.println("inner_member_method()");
+		}
+	}
+	/**********************************************/
+
+}

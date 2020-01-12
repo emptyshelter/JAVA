@@ -1,0 +1,11 @@
+import java.io.InputStream;
+
+public class InputStreamReadThreadBlockMain {
+
+	public static void main(String[] args) throws Exception {
+		InputStream consoleIn = System.in;
+		consoleIn.read();
+
+	}
+
+}

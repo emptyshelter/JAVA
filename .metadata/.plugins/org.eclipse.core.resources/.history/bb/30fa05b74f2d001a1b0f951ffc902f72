@@ -1,0 +1,31 @@
+package layout;
+
+import java.awt.Button;
+import java.awt.Frame;
+import java.awt.List;
+import java.awt.Panel;
+import java.awt.TextArea;
+
+public class Chatting extends Frame {
+	Panel southP;
+	Button sb1,sb2,sb3,sb4;
+	Panel northP;
+	Button nb1,nb2,nb3,nb4;
+	Panel centerP;
+	List cList;
+	TextArea cTextArea;
+	
+	public Chatting() {
+		
+		
+	}
+	
+	
+	
+	
+	public static void main(String[] args) {
+		new Chatting();
+		
+	}
+
+}

@@ -1,0 +1,14 @@
+package dao.guest;
+
+public class GuestDaoTestMain {
+
+	public static void main(String[] args) throws Exception {
+		GuestDaoImpl guest = new GuestDaoImpl();
+		Guest findguest = new Guest();
+		findguest = guest.selectByNo(2);
+		System.out.println(findguest);
+		int result = guest.insertGuest(new Guest(0, "테스트손님","guest_date", "test@test.com", "없당~", "모른당~", "모른당~"));
+
+	}
+
+}

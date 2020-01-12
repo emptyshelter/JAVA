@@ -1,0 +1,493 @@
+package com.itwill.member.ui;
+
+import java.awt.BorderLayout;
+import java.awt.EventQueue;
+
+import javax.swing.JFrame;
+import javax.swing.JPanel;
+import javax.swing.border.EmptyBorder;
+
+import com.itwill.member.Member;
+import com.itwill.member.MemberService;
+
+import javax.swing.JTabbedPane;
+import javax.swing.JButton;
+import java.awt.event.ActionListener;
+import java.util.ArrayList;
+import java.awt.event.ActionEvent;
+import javax.swing.JLabel;
+import javax.swing.JOptionPane;
+import javax.swing.JTextField;
+import javax.swing.JScrollPane;
+import javax.swing.JTextArea;
+
+public class MemberFrame extends JFrame {
+
+	private JPanel contentPane;
+	private JTabbedPane tabbedPane;
+	private JTextField idJoinTF;
+	private JTextField passwordJoinTF;
+	private JTextField nameTF;
+	private JTextField addressTF;
+	private JTextField ageTF;
+	private JTextField marriedTF;
+	
+	private MemberService memberService;
+	private JTextArea listTA;
+	private JTextField idLoginTF;
+	private JTextField passwordLoginTF;
+	private JTextField idUpTF;
+	private JTextField passwordUpTF;
+	private JTextField nameUpTF;
+	private JTextField addressUpTF;
+	private JTextField ageUpTF;
+	private JTextField marriedUpTF;
+	
+	private Member loginMember;
+
+	/**
+	 * Launch the application.
+	 */
+	public static void main(String[] args) {
+		EventQueue.invokeLater(new Runnable() {
+			public void run() {
+				try {
+					MemberFrame frame = new MemberFrame();
+					frame.setVisible(true);
+				} catch (Exception e) {
+					e.printStackTrace();
+				}
+			}
+		});
+	}
+
+	/**
+	 * Create the frame.
+	 */
+	public MemberFrame() throws Exception {
+		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+		setBounds(100, 100, 467, 469);
+		contentPane = new JPanel();
+		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
+		contentPane.setLayout(new BorderLayout(0, 0));
+		setContentPane(contentPane);
+		
+		tabbedPane = new JTabbedPane(JTabbedPane.TOP);
+		contentPane.add(tabbedPane, BorderLayout.CENTER);
+		
+		JPanel loginP = new JPanel();
+		tabbedPane.addTab("login", null, loginP, null);
+		loginP.setLayout(null);
+		
+		JButton btnLogin = new JButton("login");
+		btnLogin.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				String idLoginTFStr = idLoginTF.getText();
+				String passwordLoginTFStr = passwordLoginTF.getText();
+				
+				try {
+					int result = memberService.login(idLoginTFStr, passwordLoginTFStr);
+					if(result == 0) {
+						setTitle(idLoginTFStr+" 님 로그인 성공");
+						tabbedPane.setEnabledAt(0, false);
+						tabbedPane.setEnabledAt(1, false);
+						tabbedPane.setEnabledAt(2, true);
+						tabbedPane.setEnabledAt(3, false);
+						tabbedPane.setSelectedIndex(2);
+						loginMember = memberService.findById(idLoginTFStr);
+						idLoginTF.setText("");
+						passwordLoginTF.setText("");
+						Member findMember = memberService.findById(loginMember.getId());
+						listTA.setText(findMember.toString()+"\n");
+					}else if(result == 1) {
+						setTitle("아이디 존재안함");
+						JOptionPane.showMessageDialog(null, "아이디 존재안함");
+						idLoginTF.setText("");
+						idLoginTF.requestFocus();
+					}else if(result == 2) {
+						setTitle("패스워드 불일치");
+						JOptionPane.showMessageDialog(null, "패스워드 불일치");
+						passwordLoginTF.setText("");
+						passwordLoginTF.requestFocus();
+					}
+				} catch (Exception e1) {
+					
+				}
+			}
+		});
+		btnLogin.setBounds(94, 279, 97, 23);
+		loginP.add(btnLogin);
+		
+		JLabel lblIdLogin = new JLabel("id");
+		lblIdLogin.setBounds(94, 80, 57, 15);
+		loginP.add(lblIdLogin);
+		
+		JLabel lblPasswordLogin = new JLabel("password");
+		lblPasswordLogin.setBounds(94, 184, 57, 15);
+		loginP.add(lblPasswordLogin);
+		
+		idLoginTF = new JTextField();
+		idLoginTF.setBounds(229, 77, 116, 21);
+		loginP.add(idLoginTF);
+		idLoginTF.setColumns(10);
+		
+		passwordLoginTF = new JTextField();
+		passwordLoginTF.setBounds(229, 181, 116, 21);
+		loginP.add(passwordLoginTF);
+		passwordLoginTF.setColumns(10);
+		
+		JButton btnJoin_1 = new JButton("join");
+		btnJoin_1.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				tabbedPane.setSelectedIndex(1);
+			}
+		});
+		btnJoin_1.setBounds(248, 279, 97, 23);
+		loginP.add(btnJoin_1);
+		
+		JPanel joinP = new JPanel();
+		tabbedPane.addTab("join", null, joinP, null);
+		joinP.setLayout(null);
+		
+		JLabel lblIdJoin = new JLabel("id");
+		lblIdJoin.setBounds(77, 41, 57, 15);
+		joinP.add(lblIdJoin);
+		
+		JLabel lblPasswordJoin = new JLabel("password");
+		lblPasswordJoin.setBounds(77, 86, 57, 15);
+		joinP.add(lblPasswordJoin);
+		
+		JLabel lblName = new JLabel("name");
+		lblName.setBounds(77, 133, 57, 15);
+		joinP.add(lblName);
+		
+		JLabel lblAddress = new JLabel("address");
+		lblAddress.setBounds(77, 182, 57, 15);
+		joinP.add(lblAddress);
+		
+		JLabel lblAge = new JLabel("age");
+		lblAge.setBounds(77, 234, 57, 15);
+		joinP.add(lblAge);
+		
+		JLabel lblMarried = new JLabel("married(true, false)");
+		lblMarried.setBounds(77, 284, 116, 15);
+		joinP.add(lblMarried);
+		
+		JButton btnJoin = new JButton("join");
+		btnJoin.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				String idStr = idJoinTF.getText();
+				String passwordStr = passwordJoinTF.getText();
+				String nameStr = nameTF.getText();
+				String addressStr = addressTF.getText();
+				String ageStr = ageTF.getText();
+				String marriedStr = marriedTF.getText();
+				
+				Member addMember = new Member(idStr, 
+											  passwordStr, 
+											  nameStr, 
+											  addressStr, 
+											  Integer.parseInt(ageStr), 
+											  Boolean.parseBoolean(marriedStr));
+				try {
+					boolean isAdd = memberService.memberRegister(addMember);
+					if(isAdd) {
+						JOptionPane.showMessageDialog(null, "회원가입성공");
+						idJoinTF.setText("");
+						passwordJoinTF.setText("");
+						nameTF.setText("");
+						addressTF.setText("");
+						ageTF.setText("");
+						marriedTF.setText("");
+						tabbedPane.setSelectedIndex(0);
+					}else {
+						JOptionPane.showMessageDialog(null, "회원가입실패 (동일한 아이디가 존재)");
+						idJoinTF.setText("");
+					}
+				} catch (Exception e1) {
+					JOptionPane.showMessageDialog(null, "죄송합니다. 고객님");
+				}
+			}
+		});
+		btnJoin.setBounds(164, 330, 97, 23);
+		joinP.add(btnJoin);
+		
+		idJoinTF = new JTextField();
+		idJoinTF.setBounds(233, 38, 116, 21);
+		joinP.add(idJoinTF);
+		idJoinTF.setColumns(10);
+		
+		passwordJoinTF = new JTextField();
+		passwordJoinTF.setBounds(233, 83, 116, 21);
+		joinP.add(passwordJoinTF);
+		passwordJoinTF.setColumns(10);
+		
+		nameTF = new JTextField();
+		nameTF.setBounds(233, 130, 116, 21);
+		joinP.add(nameTF);
+		nameTF.setColumns(10);
+		
+		addressTF = new JTextField();
+		addressTF.setBounds(233, 179, 116, 21);
+		joinP.add(addressTF);
+		addressTF.setColumns(10);
+		
+		ageTF = new JTextField();
+		ageTF.setBounds(233, 231, 116, 21);
+		joinP.add(ageTF);
+		ageTF.setColumns(10);
+		
+		marriedTF = new JTextField();
+		marriedTF.setBounds(233, 281, 116, 21);
+		joinP.add(marriedTF);
+		marriedTF.setColumns(10);
+		
+		JPanel listP = new JPanel();
+		tabbedPane.addTab("list", null, listP, null);
+		tabbedPane.setEnabledAt(2, false);
+		listP.setLayout(null);
+		
+		JButton btnLogout = new JButton("logout");
+		btnLogout.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				setTitle("");
+				tabbedPane.setEnabledAt(0, true);
+				tabbedPane.setEnabledAt(1, true);
+				tabbedPane.setEnabledAt(2, false);
+				tabbedPane.setSelectedIndex(0);
+			}
+		});
+		btnLogout.setBounds(316, 10, 97, 23);
+		listP.add(btnLogout);
+		
+		JScrollPane scrollPane = new JScrollPane();
+		scrollPane.setBounds(12, 50, 412, 249);
+		listP.add(scrollPane);
+		
+		listTA = new JTextArea();
+		scrollPane.setViewportView(listTA);
+		
+		JButton btnList = new JButton("list");
+		btnList.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				getMemberList();
+			}
+		});
+		btnList.setBounds(12, 309, 97, 23);
+		listP.add(btnList);
+		
+		JButton btnFindbyid = new JButton("findById");
+		btnFindbyid.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				try {
+					String memberIdStr = JOptionPane.showInputDialog(null, 
+										"아이디를 입력하세요.", 
+										"id", 
+										JOptionPane.INFORMATION_MESSAGE);
+					Member findMember = memberService.findById(memberIdStr);
+					if(findMember == null) {
+						JOptionPane.showMessageDialog(null, memberIdStr+" 아이디정보가 없네요.");
+						return;
+					}
+					listTA.setText(findMember.toString()+"\n");
+				} catch (Exception e1) {
+					JOptionPane.showMessageDialog(null, "죄송합니다. 고객님");
+				}
+			}
+		});
+		btnFindbyid.setBounds(12, 342, 97, 23);
+		listP.add(btnFindbyid);
+		
+		JButton btnFindbyage = new JButton("findByAge");
+		btnFindbyage.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				try {
+					String memberAgeStr = JOptionPane.showInputDialog(null, 
+										"나이를 입력하세요.", 
+										"나이", 
+										JOptionPane.INFORMATION_MESSAGE);
+					int memberAge = Integer.parseInt(memberAgeStr); 
+					ArrayList<Member> findMemberList = memberService.findMemberByAge(memberAge);
+					String memberListStr = "";
+					for (Member member : findMemberList) {
+						memberListStr += member.toString()+"\n";
+					}
+					listTA.setText(memberListStr);
+				} catch (Exception e1) {
+					JOptionPane.showMessageDialog(null, "죄송합니다. 고객님");
+				}
+			}
+		});
+		btnFindbyage.setBounds(316, 342, 97, 23);
+		listP.add(btnFindbyage);
+		
+		JButton btnFindbyaddress = new JButton("findByAddress");
+		btnFindbyaddress.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				try {
+					String memberAddressStr = JOptionPane.showInputDialog(null, 
+										"주소를 입력하세요.", 
+										"주소", 
+										JOptionPane.INFORMATION_MESSAGE);
+					ArrayList<Member> findMemberList = memberService.findMemberByAdress(memberAddressStr);
+					String memberListStr = "";
+					for (Member member : findMemberList) {
+						memberListStr += member.toString()+"\n";
+					}
+					listTA.setText(memberListStr);
+				} catch (Exception e1) {
+					JOptionPane.showMessageDialog(null, "죄송합니다. 고객님");
+				}
+			}
+		});
+		btnFindbyaddress.setBounds(152, 342, 122, 23);
+		listP.add(btnFindbyaddress);
+		
+		JButton btnUpdate = new JButton("update");
+		btnUpdate.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				tabbedPane.setEnabledAt(3, true);
+				tabbedPane.setSelectedIndex(3);
+				idUpTF.setText(loginMember.getId());
+				nameUpTF.setText(loginMember.getName());
+				addressUpTF.setText(loginMember.getAddress());
+				ageUpTF.setText(loginMember.getAge()+"");
+				marriedUpTF.setText(loginMember.isMarried()+"");
+			}
+		});
+		btnUpdate.setBounds(162, 309, 97, 23);
+		listP.add(btnUpdate);
+		
+		JButton btnDelete = new JButton("delete");
+		btnDelete.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				try {
+					String idStr = loginMember.getId();
+					memberService.deleteMember(idStr);
+					setTitle("");
+					tabbedPane.setEnabledAt(0, true);
+					tabbedPane.setEnabledAt(1, true);
+					tabbedPane.setEnabledAt(2, false);
+					JOptionPane.showMessageDialog(null, "아이디 삭제 완료");
+					tabbedPane.setSelectedIndex(0);
+				} catch (Exception e1) {
+					JOptionPane.showMessageDialog(null, "죄송합니다. 고객님");
+				}
+			}
+		});
+		btnDelete.setBounds(316, 309, 97, 23);
+		listP.add(btnDelete);
+		
+		JPanel updateP = new JPanel();
+		tabbedPane.addTab("update", null, updateP, null);
+		tabbedPane.setEnabledAt(3, false);
+		updateP.setLayout(null);
+		
+		JLabel lblIdUp = new JLabel("id");
+		lblIdUp.setBounds(79, 38, 57, 15);
+		updateP.add(lblIdUp);
+		
+		JLabel lblPasswordUp = new JLabel("password");
+		lblPasswordUp.setBounds(79, 83, 57, 15);
+		updateP.add(lblPasswordUp);
+		
+		JLabel lblNameUp = new JLabel("name");
+		lblNameUp.setBounds(79, 130, 57, 15);
+		updateP.add(lblNameUp);
+		
+		JLabel lblAddressUp = new JLabel("address");
+		lblAddressUp.setBounds(79, 179, 57, 15);
+		updateP.add(lblAddressUp);
+		
+		JLabel lblAgeUp = new JLabel("age");
+		lblAgeUp.setBounds(79, 231, 57, 15);
+		updateP.add(lblAgeUp);
+		
+		JLabel lblMarriedUp = new JLabel("married(true, false)");
+		lblMarriedUp.setBounds(79, 281, 116, 15);
+		updateP.add(lblMarriedUp);
+		
+		idUpTF = new JTextField();
+		idUpTF.setEditable(false);
+		idUpTF.setColumns(10);
+		idUpTF.setBounds(235, 35, 116, 21);
+		updateP.add(idUpTF);
+		
+		passwordUpTF = new JTextField();
+		passwordUpTF.setColumns(10);
+		passwordUpTF.setBounds(235, 80, 116, 21);
+		updateP.add(passwordUpTF);
+		
+		nameUpTF = new JTextField();
+		nameUpTF.setColumns(10);
+		nameUpTF.setBounds(235, 127, 116, 21);
+		updateP.add(nameUpTF);
+		
+		addressUpTF = new JTextField();
+		addressUpTF.setColumns(10);
+		addressUpTF.setBounds(235, 176, 116, 21);
+		updateP.add(addressUpTF);
+		
+		ageUpTF = new JTextField();
+		ageUpTF.setColumns(10);
+		ageUpTF.setBounds(235, 228, 116, 21);
+		updateP.add(ageUpTF);
+		
+		marriedUpTF = new JTextField();
+		marriedUpTF.setColumns(10);
+		marriedUpTF.setBounds(235, 278, 116, 21);
+		updateP.add(marriedUpTF);
+		
+		JButton btnUpdateAction = new JButton("update");
+		btnUpdateAction.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				try {
+					String passwordStr = passwordUpTF.getText();
+					String nameStr = nameUpTF.getText();
+					String addressStr = addressUpTF.getText();
+					String ageStr = ageUpTF.getText();
+					String marriedStr = marriedUpTF.getText();
+					
+					Member updateMember = new Member(loginMember.getId(), 
+												  passwordStr, 
+												  nameStr, 
+												  addressStr, 
+												  Integer.parseInt(ageStr), 
+												  Boolean.parseBoolean(marriedStr));
+					
+					memberService.updateMember(updateMember);
+					loginMember = memberService.findById(updateMember.getId());
+					idUpTF.setText("");
+					passwordUpTF.setText("");
+					nameUpTF.setText("");
+					addressUpTF.setText("");
+					ageUpTF.setText("");
+					marriedUpTF.setText("");
+					tabbedPane.setEnabledAt(3, false);
+					tabbedPane.setSelectedIndex(2);
+					getMemberList();
+				} catch (Exception e1) {
+					JOptionPane.showMessageDialog(null, "죄송합니다. 고객님");
+				}
+				
+			}
+		});
+		btnUpdateAction.setBounds(154, 329, 97, 23);
+		updateP.add(btnUpdateAction);
+		
+		memberService = new MemberService();
+	}
+	
+	private void getMemberList() {
+		try {
+			ArrayList<Member> memberList = memberService.findMemberByAll();
+			String memberListStr = "";
+			for (Member member : memberList) {
+				memberListStr += member.toString()+"\n";
+			}
+			listTA.setText(memberListStr);
+		} catch (Exception e) {
+			JOptionPane.showMessageDialog(null, "죄송합니다. 고객님");
+		}
+	}
+}

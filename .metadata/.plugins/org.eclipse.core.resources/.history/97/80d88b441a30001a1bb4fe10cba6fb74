@@ -1,0 +1,196 @@
+package event;
+
+import java.awt.BorderLayout;
+import java.awt.EventQueue;
+
+import javax.swing.JFrame;
+import javax.swing.JPanel;
+import javax.swing.border.EmptyBorder;
+
+import event.CalculatorJFrame2.ButtonHandler;
+
+import javax.swing.JTextPane;
+import javax.swing.JTextField;
+import java.awt.Font;
+import java.awt.GridLayout;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
+
+import javax.swing.JButton;
+import java.awt.Color;
+import javax.swing.UIManager;
+
+public class Calculator extends JFrame {
+
+	private JPanel contentPane;
+	private JTextField tF;
+	private String firstOp="";
+	private String secondOp="";
+	private Double result=0.0;
+	private String operator="";
+
+
+	/**
+	 * Launch the application.
+	 */
+	public static void main(String[] args) {
+		EventQueue.invokeLater(new Runnable() {
+			public void run() {
+				try {
+					Calculator frame = new Calculator();
+					frame.setVisible(true);
+				} catch (Exception e) {
+					e.printStackTrace();
+				}
+			}
+		});
+	}
+
+	/**
+	 * Create the frame.
+	 */
+	public Calculator() {
+		setTitle("Calculator");
+		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+		setBounds(100, 100, 350, 400);
+		contentPane = new JPanel();
+		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
+		contentPane.setLayout(new BorderLayout(0, 0));
+		setContentPane(contentPane);
+		
+		JPanel northP = new JPanel();
+		contentPane.add(northP, BorderLayout.NORTH);
+		
+		tF = new JTextField();
+		tF.setBackground(Color.BLACK);
+		tF.setForeground(Color.WHITE);
+		tF.setColumns(40);
+		tF.setFont(new Font("D2Coding", Font.BOLD, 15));
+		northP.add(tF);
+		
+		JPanel southP = new JPanel();
+		southP.setBackground(Color.LIGHT_GRAY);
+		contentPane.add(southP, BorderLayout.CENTER);
+		southP.setLayout(new GridLayout(4, 5, 4, 4));
+		
+		JButton b1 = new JButton("1");
+		southP.add(b1);
+		
+		JButton b2 = new JButton("2");
+		southP.add(b2);
+		
+		JButton b3 = new JButton("3");
+		southP.add(b3);
+		
+		JButton minusB = new JButton("-");
+		minusB.setFont(new Font("굴림", Font.BOLD, 15));
+		minusB.setForeground(Color.BLUE);
+		southP.add(minusB);
+		
+		JButton b4 = new JButton("4");
+		southP.add(b4);
+		
+		JButton b5 = new JButton("5");
+		southP.add(b5);
+		
+		JButton b6 = new JButton("6");
+		southP.add(b6);
+		
+		JButton plusB = new JButton("+");
+		plusB.setFont(new Font("굴림", Font.BOLD, 15));
+		plusB.setForeground(Color.RED);
+		southP.add(plusB);
+		
+		JButton b7 = new JButton("7");
+		southP.add(b7);
+		
+		JButton b8 = new JButton("8");
+		southP.add(b8);
+		
+		JButton b9 = new JButton("9");
+		southP.add(b9);
+		
+		JButton divB = new JButton("/");
+		divB.setFont(new Font("굴림", Font.BOLD, 15));
+		divB.setForeground(Color.BLUE);
+		southP.add(divB);
+		
+		JButton b0 = new JButton("0");
+		southP.add(b0);
+		
+		JButton resetB = new JButton("C");
+		southP.add(resetB);
+		
+		JButton equalB = new JButton("=");
+		southP.add(equalB);
+		
+		JButton mulB = new JButton("*");
+		mulB.setFont(new Font("굴림", Font.BOLD, 15));
+		mulB.setForeground(Color.RED);
+		southP.add(mulB);
+		
+		ButtonHandler bh=new ButtonHandler();
+		b1.addActionListener(bh);
+		b2.addActionListener(bh);
+		b3.addActionListener(bh);
+		b4.addActionListener(bh);
+		b5.addActionListener(bh);
+		b6.addActionListener(bh);
+		b7.addActionListener(bh);
+		b8.addActionListener(bh);
+		b9.addActionListener(bh);
+		b0.addActionListener(bh);
+		plusB.addActionListener(bh);
+		minusB.addActionListener(bh);
+		divB.addActionListener(bh);
+		equalB.addActionListener(bh);
+		resetB.addActionListener(bh);
+		mulB.addActionListener(bh);
+	}
+	public class ButtonHandler implements ActionListener{
+
+		@Override
+		public void actionPerformed(ActionEvent e) {
+			System.out.println(e);
+			String input = e.getActionCommand();//Component의 텍스트 값을 구분
+			//JButton source = (JButton) e.getSource(); Component의 참조변수명을 구분
+			if (input.equals("0") || input.equals("1") || input.equals("2") || input.equals("3") || input.equals("4") ||
+				input.equals("5") || input.equals("6") || input.equals("7") || input.equals("8") || input.equals("9")){
+				if((tF.getText()).equals("0")){
+					tF.setText("");
+				}else {
+					firstOp = tF.getText()+input;
+					tF.setText(firstOp);				
+				}
+			}if (input.equals("+") || input.equals("-") || input.equals("*") || input.equals("/")) {
+				if (firstOp!=null) {
+					operator += input;
+					tF.setText("");
+					secondOp += firstOp;
+					firstOp ="";
+				}
+			}else if (input.equals("=")) {
+				if (operator.equals("+")) {
+					result = Double.parseDouble(secondOp)+Double.parseDouble(firstOp);
+				}else if (operator.equals("-")) {
+					result = Double.parseDouble(secondOp)-Double.parseDouble(firstOp);
+				}else if (operator.equals("*")) {
+					result = Double.parseDouble(secondOp)*Double.parseDouble(firstOp);
+				}else if (operator.equals("/")) {
+					result = Double.parseDouble(secondOp)/Double.parseDouble(firstOp);
+				}
+				firstOp= result.toString();
+				tF.setText(firstOp);
+				secondOp="";
+				operator="";
+			}else if (input.equals("C")) {
+				tF.setText("");
+				firstOp = "";
+				secondOp = "";
+				operator= "";
+			}
+		}
+	}
+}
+
+

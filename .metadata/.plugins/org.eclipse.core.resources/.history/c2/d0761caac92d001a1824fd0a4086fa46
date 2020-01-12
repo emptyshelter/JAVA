@@ -1,0 +1,8 @@
+
+public class OuterClass2 {
+	public int outer_class_member_field;
+	public void outer_class_method1() {
+		
+	}
+
+}

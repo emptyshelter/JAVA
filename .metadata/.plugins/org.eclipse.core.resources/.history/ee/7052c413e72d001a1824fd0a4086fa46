@@ -1,0 +1,87 @@
+package layout.swing;
+
+import java.awt.BorderLayout;
+import java.awt.Color;
+import java.awt.EventQueue;
+
+import javax.swing.JFrame;
+import javax.swing.JPanel;
+import javax.swing.border.EmptyBorder;
+import javax.swing.JButton;
+import java.awt.event.ActionListener;
+import java.awt.event.ActionEvent;
+
+public class BorderLayoutJFrame extends JFrame {
+
+	private JPanel contentPane;
+	private JButton btnNorth;
+	private JButton btnWest;
+	private JButton btnEast;
+	private JButton btnSouth;
+	private JButton btnCenter;
+
+	/**
+	 * Launch the application.
+	 */
+	public static void main(String[] args) {
+		EventQueue.invokeLater(new Runnable() {
+			public void run() {
+				try {
+					BorderLayoutJFrame frame = new BorderLayoutJFrame();
+					frame.setVisible(true);
+				} catch (Exception e) {
+					e.printStackTrace();
+				}
+			}
+		});
+	}
+
+	/**
+	 * Create the frame.
+	 */
+	public BorderLayoutJFrame() {
+		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+		setBounds(100, 100, 450, 300);
+		contentPane = new JPanel();
+		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
+		contentPane.setLayout(new BorderLayout(0, 0));
+		setContentPane(contentPane);
+		
+		btnNorth = new JButton("NORTH");
+		btnNorth.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				getContentPane().setBackground(Color.red);
+			}
+		});
+		contentPane.add(btnNorth, BorderLayout.NORTH);
+		
+		btnWest = new JButton("WEST");
+		btnWest.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+			}
+		});
+		contentPane.add(btnWest, BorderLayout.WEST);
+		
+		btnEast = new JButton("EAST");
+		btnEast.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+			}
+		});
+		contentPane.add(btnEast, BorderLayout.EAST);
+		
+		btnSouth = new JButton("SOUTH");
+		btnSouth.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+			}
+		});
+		contentPane.add(btnSouth, BorderLayout.SOUTH);
+		
+		btnCenter = new JButton("CENTER");
+		btnCenter.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+			}
+		});
+		contentPane.add(btnCenter, BorderLayout.CENTER);
+	}
+
+}

@@ -1,0 +1,44 @@
+package layout;
+
+import java.awt.BorderLayout;
+import java.awt.Button;
+import java.awt.Color;
+import java.awt.FlowLayout;
+import java.awt.Frame;
+import java.awt.Panel;
+
+public class PanelFrame extends Frame {
+	Panel southP;
+	Button sb1,sb2,sb3,sb4;
+	Panel northP;
+	
+	public PanelFrame() {
+		setLayout(new BorderLayout());
+		
+		southP=new Panel();
+		southP.setBackground(Color.PINK);
+		southP.setLayout(new FlowLayout());
+		
+		sb1=new Button("추가");
+		sb2=new Button("수정");
+		sb3=new Button("삭제");
+		sb4=new Button("리스트");
+		
+		southP.add(sb1);
+		southP.add(sb2);
+		southP.add(sb3);
+		southP.add(sb4);
+		
+		
+		add(southP,BorderLayout.SOUTH);
+		
+		setSize(300, 400);
+		setVisible(true);
+		
+	}
+	public static void main(String[] args) {
+		new PanelFrame();
+
+	}
+
+}

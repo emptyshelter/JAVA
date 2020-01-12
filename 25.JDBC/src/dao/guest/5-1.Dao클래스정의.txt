@@ -1,0 +1,29 @@
+/*
+1. 작성된 DTO클래스당 기본적으로 1개의 Dao클래스작성
+2. 모든 Dao 클래스는 5개의 기본메쏘드정의
+   - insert
+   - selectByNo or selectById
+   - selectAll
+   - updateById or updateByNo
+   - deleteById or updateByNo
+3. 각각 Dao클래스 공통메쏘드 정의
+	-----------------------------------------
+	public class MemberDao{
+		/**************공통부분****************/
+		public MemberDao() throws Exception {}
+		/*************************************/
+		public void insert(Member m){	}
+		public Member selectById(){}
+		public ArrayList<Member> selectAll(){}
+		public void updateById(Member m){}
+		public void deleteById(String id){}
+	}
+
+	public class ProductDao{
+		public void insert(Product p){}
+		public Product selectByNo(){}
+		public ArrayList<Product> selectAll(){}
+		public void updateByNo(Product p){}
+		public void deleteByNo(int no){}
+	}
+

@@ -1,0 +1,59 @@
+package resultset;
+
+import java.sql.Connection;
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
+import java.sql.SQLException;
+
+import com.itwill.dao.common.ConnectionFactory;
+
+public class ResultSetScrollableUpdatableMain {
+	
+	public static void main(String[] args) throws Exception {
+		String selectSql = "select empno, ename, job, mgr, hiredate, sal, comm, deptno "
+					 	  + "from emp order by empno asc";
+		/*
+		 * ResultSet.TYPE_FORWARD_ONLY -default 단방향이동
+		 * ResultSet.CONCUR_READ_ONLY - 데이터를 읽을수만있음
+		 */
+		Connection con = ConnectionFactory.getConnection();
+		PreparedStatement pstmt = 
+				con.prepareStatement(
+						selectSql,
+						ResultSet.TYPE_SCROLL_SENSITIVE,
+						ResultSet.CONCUR_READ_ONLY);
+		ResultSet rs = pstmt.executeQuery();
+		System.out.println("----------------rs.next()-------------------");
+		while (rs.next()) {
+			System.out.println(rs.getInt("empno")+"\t"+rs.getString("ename"));
+		}
+		System.out.println("----------------rs.previous()-------------------");
+		while (rs.previous()) {
+			System.out.println(rs.getInt("empno")+"\t"+rs.getString("ename"));
+		}
+		System.out.println("----------------rs.first()-------------------");
+		rs.first();
+		System.out.println(rs.getInt("empno")+"\t"+rs.getString("ename"));
+		System.out.println("----------------rs.last()-------------------");
+		rs.last();
+		System.out.println(rs.getInt("empno")+"\t"+rs.getString("ename"));
+		int rowNum = rs.getRow();
+		System.out.println("데이터 개수: "+rowNum);
+		System.out.println(rs.getInt("empno")+"\t"+rs.getString("ename"));
+		System.out.println("----------------rs.absolute()-------------------");
+		rs.absolute(5);
+		System.out.println(rs.getInt("empno")+"\t"+rs.getString("ename"));
+		System.out.println("----------------rs.ralative(1)-------------------");
+		rs.relative(1);
+		System.out.println(rs.getInt("empno")+"\t"+rs.getString("ename"));
+		System.out.println("----------------rs.ralative(-1)-------------------");
+		rs.relative(-1);
+		System.out.println(rs.getInt("empno")+"\t"+rs.getString("ename"));
+		rs.beforeFirst();
+		System.out.println(rs.getInt("empno")+"\t"+rs.getString("ename"));
+		rs.next();
+		System.out.println(rs.getInt("empno")+"\t"+rs.getString("ename"));
+		
+	}
+
+}

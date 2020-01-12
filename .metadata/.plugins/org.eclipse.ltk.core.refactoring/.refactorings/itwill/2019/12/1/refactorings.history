@@ -1,0 +1,4 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<session version="1.0">
+<refactoring comment="Copy element &apos;Account.java&apos; to &apos;22.입출력[IO]/src/byte_stream.filter_stream&apos;&#x0D;&#x0A;- Original project: &apos;itwill&apos;&#x0D;&#x0A;- Destination element: &apos;22.입출력[IO]/src/byte_stream.filter_stream&apos;&#x0D;&#x0A;- Original element: &apos;Account.java&apos;" description="Copy file" destination="=22.입출력\[IO\]/src&lt;byte_stream.filter_stream" element1="account/Account.java" files="1" flags="589830" folders="0" id="org.eclipse.jdt.ui.copy" policy="org.eclipse.jdt.ui.copyResources" stamp="1577686550011" units="0" version="1.0"/>
+</session>

@@ -1,0 +1,63 @@
+package statement;
+
+import java.sql.Connection;
+import java.sql.DriverManager;
+import java.sql.ResultSet;
+import java.sql.SQLException;
+import java.sql.Statement;
+
+public class StatementMain {
+
+	public static void main(String[] args) throws Exception {
+		String driverClass="oracle.jdbc.OracleDriver";
+		String url="jdbc:oracle:thin:@182.237.126.19:1521:XE";
+		String user="javaspring20";
+		String password="javaspring20";
+		
+		String selectSql = "select * from emp order by sal desc";
+		String updateSql = "update emp set sal=9000 where empno=7369";
+		
+		Class.forName(driverClass);
+		Connection con = DriverManager.getConnection(url);
+		Statement stmt = con.createStatement();
+		/*
+		 * ResultSet 행의수를 제한
+		 */
+		stmt.setMaxRows(3);
+		/*
+		ResultSet executeQuery(String sql) throws SQLException
+			- Executes the given SQL statement, 
+			  which returns a single ResultSet object.
+			Parameters:
+				sql - an SQL statement to be sent to the database,
+				      typically a static SQL SELECT statement
+			Returns:
+				a ResultSet object that contains the data produced by the given query; 
+				never null
+		 */
+/*
+		
+		이름       널?       유형           
+		-------- -------- ------------ 
+		EMPNO    NOT NULL NUMBER(4)    
+		ENAME             VARCHAR2(10) 
+		JOB               VARCHAR2(9)  
+		MGR               NUMBER(4)    
+		HIREDATE          DATE         
+		SAL               NUMBER(7,2)  
+		COMM              NUMBER(7,2)  
+		DEPTNO            NUMBER(2)  
+	
+		 */
+		ResultSet rs = stmt.executeQuery(selectSql);
+		while(rs.next()) {
+			int empno = rs.getInt("empno");
+			String ename=rs.getString("ename");
+			String job=rs.getString("job");
+			double sal=rs.getDouble("sal");
+			System.out.println(empno+"\t"+ename+"\t"+job+"\t"+sal);
+		}
+
+	}
+
+}

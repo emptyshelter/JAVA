@@ -1,0 +1,40 @@
+package com.itwill.member.test;
+
+import com.itwill.member.Member;
+import com.itwill.member.MemberService;
+
+public class MemberServiceTestMain {
+
+	public static void main(String[] args) throws Exception{
+		MemberService memberService=new MemberService();
+		System.out.println("----------memberRegister---------");
+		memberService.memberRegister(
+				new Member( "c", "c", "¾¾¾¾¾¾¾¾", "ºÎ»ê½Ã¹Î", 21, false));
+		memberService.memberRegister(
+				new Member( "d", "d", "µðµðµðµð", "°æÁÖ½Ã¹Î", 37, false));
+		boolean success = memberService.memberRegister(
+				new Member( "e", "e", "ÀÌÀÌÀÌÀÌ", "ºÎ»ê½Ã¹Î", 45, true));
+		System.out.println("1.¼º°ø:"+success);
+		System.out.println("----------findMemberByAll---------");
+		System.out.println(memberService.findMemberByAll());
+		System.out.println("----------findById---------");
+		System.out.println(memberService.findById("e"));
+		System.out.println(memberService.findById("b"));
+		System.out.println("----------login---------");
+		System.out.println(memberService.login("e", "e"));
+		System.out.println(memberService.login("e", "a"));
+		System.out.println(memberService.login("a", "111"));
+		
+		
+	}
+
+}
+
+
+
+
+
+
+
+
+

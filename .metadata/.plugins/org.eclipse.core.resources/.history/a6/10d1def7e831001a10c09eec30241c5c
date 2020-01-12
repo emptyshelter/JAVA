@@ -1,0 +1,9 @@
+package dao.address;
+
+public class AddressInsertMain {
+
+	public static void main(String[] args) {
+
+	}
+
+}

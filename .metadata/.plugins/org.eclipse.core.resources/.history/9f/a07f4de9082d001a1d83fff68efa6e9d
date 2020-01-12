@@ -1,0 +1,17 @@
+package basic;
+
+import java.awt.Color;
+
+public class ChildFrameMain {
+
+	public static void main(String[] args) {
+		ChildFrame cf = new ChildFrame();
+		cf.setTitle("상속에 의한 프레임사용");
+		cf.setBackground(new Color(125,125,0));
+		cf.setSize(300, 400);
+		cf.setVisible(true);
+		
+
+	}
+
+}

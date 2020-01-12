@@ -1,0 +1,57 @@
+package com.itwill.account;
+
+import java.sql.Connection;
+import java.sql.PreparedStatement;
+import java.sql.SQLException;
+
+import com.itwill.account.factory.AccountFactory;
+
+public class AccountDao2 {
+	public int insert(Account account) throws Exception {
+
+		String createSql = "insert into Account values(?,?,?,?)";
+		Connection con = AccountFactory.getConnection();
+		PreparedStatement pstmt = con.prepareStatement(createSql);
+		pstmt.setInt(1, account.getNo());
+		pstmt.setString(2, account.getOwner());
+		pstmt.setInt(3, account.getBalance());
+		pstmt.setDouble(4, account.getIyul());
+		int result = pstmt.executeUpdate();
+		System.out.println(result+"개의 데이터가 생성되었습니다.");
+		return result;
+	}
+	public int readAll() throws Exception {
+		String readAll = "select * from account";
+		Connection con = AccountFactory.getConnection();
+		PreparedStatement pstmt = con.prepareStatement(readAll);
+		int result = pstmt.executeUpdate();
+		return result;
+
+		
+	}
+	public int readOne() throws Exception{
+		String readOne = "";
+		Connection con = AccountFactory.getConnection();
+		PreparedStatement pstmt = con.prepareStatement(readOne);
+		int result = pstmt.executeUpdate();
+		return result;
+
+	}
+	public int update() throws Exception{
+		String update = "";
+		Connection con = AccountFactory.getConnection();
+		PreparedStatement pstmt = con.prepareStatement(update);
+		int result = pstmt.executeUpdate();
+		return result;
+
+	}
+	public int delete() throws Exception{
+		String delete = "";
+		Connection con = AccountFactory.getConnection();
+		PreparedStatement pstmt = con.prepareStatement(delete);
+		int result = pstmt.executeUpdate();
+		return result;
+
+	}
+
+}

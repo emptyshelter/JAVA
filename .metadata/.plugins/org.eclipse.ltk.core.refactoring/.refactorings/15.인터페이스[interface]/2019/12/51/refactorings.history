@@ -1,0 +1,4 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<session version="1.0">
+<refactoring comment="Rename type &apos;InterfaceABImll&apos; to &apos;InterfaceABImpl&apos;&#x0D;&#x0A;- Original project: &apos;15.인터페이스[interface]&apos;&#x0D;&#x0A;- Original element: &apos;InterfaceABImll&apos;&#x0D;&#x0A;- Renamed element: &apos;InterfaceABImpl&apos;&#x0D;&#x0A;- Update references to refactored element&#x0D;&#x0A;- Update textual occurrences in comments and strings" description="Rename type &apos;InterfaceABImll&apos;" flags="589830" id="org.eclipse.jdt.ui.rename.type" input="/src&lt;{InterfaceABImll.java[InterfaceABImll" matchStrategy="1" name="InterfaceABImpl" qualified="false" references="true" similarDeclarations="false" stamp="1576720284091" textual="false" version="1.0"/>
+</session>

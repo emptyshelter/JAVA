@@ -1,0 +1,21 @@
+package layout;
+
+import java.awt.Frame;
+
+public class BorderLayoutFrame extends Frame{
+	Button b1,b2,b3,b4,b;
+	public BorderLayoutFrame() {
+		setSize(300, 400);
+		setVisible(true);
+	}
+
+	
+	
+	
+	
+	
+	public static void main(String[] args) {
+
+	}
+
+}

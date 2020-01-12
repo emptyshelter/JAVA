@@ -1,0 +1,29 @@
+package layout;
+
+import java.awt.BorderLayout;
+import java.awt.Frame;
+import java.awt.Panel;
+
+public class PanelFrame extends Frame {
+	Panel soutP;
+	public PanelFrame() {
+		setMenuBar(getMenuBar());
+		
+		setLayout(new BorderLayout());
+		setSize(300, 400);
+		setVisible(true);
+	}
+	
+	
+	
+	
+	
+	
+	
+	
+	public static void main(String[] args) {
+		new PanelFrame();
+	}
+
+
+}

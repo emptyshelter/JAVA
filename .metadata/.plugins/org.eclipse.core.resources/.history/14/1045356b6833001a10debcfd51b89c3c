@@ -1,0 +1,32 @@
+package dao.guest;
+
+import java.util.ArrayList;
+
+/*
+   - insert
+   - selectByNo or selectById
+   - selectAll
+   - updateById or updateByNo
+   - deleteById or updateByNo
+ */
+public interface GuestDao {
+	/*
+	 * Create
+	 */
+	public int insertGuest ();
+	/*
+	 * Read
+	 */
+	public Guest selectByNo(int no);
+	public ArrayList<Guest> selectByAll();
+	/*
+	 * Update
+	 */
+	public void updateById(int no);
+	public void updateByNo(int no);
+	
+	/*
+	 * Delete
+	 */
+
+}

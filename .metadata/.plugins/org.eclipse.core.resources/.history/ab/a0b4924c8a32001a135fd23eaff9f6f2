@@ -1,0 +1,10 @@
+package com.itwill.dao.common;
+
+public class ConnectionFactory {
+	
+	private ConnectionFactory() {
+		
+	}
+	
+
+}

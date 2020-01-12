@@ -1,0 +1,34 @@
+/*
+1. 작성된 VO클래스당 기본적으로 1개의 Dao클래스작성
+2. 모든 Dao 클래스는 5개의 기본메쏘드정의
+   - insert,
+   - selectByNo or selectById
+   - selectAll
+   - updateById or updateByNo
+   - deleteById or updateByNo
+3. 각각 Dao클래스에는 fileSave메쏘드와 fileRead메쏘드추가
+	ex>
+	
+	-----------------------------------------
+	public class MemberDao{
+		/**************공통부분****************/
+		private File memberFile;
+	 	public MemberDao() throws Exception {}
+		private ArrayList<Member> fileRead() throws Exception{}
+		private void fileSave(ArrayList<Member> memberList) throws Exception {}
+		/*************************************/
+		public void insert(MemberVO m){	}
+		public MemberVO selectById(){}
+		public ArrayList<MemberVO> selectAll(){}
+		public void updateById(MemberVO m){}
+		public void deleteById(String id){}
+	}
+
+	public class ProductDao{
+		public void insert(ProductVO p){}
+		public ProductVO selectByNo(){}
+		public ArrayList<ProductVO> selectAll(){}
+		public void updateByNo(ProductVO p){}
+		public void deleteByNo(int no){}
+	}
+

@@ -1,0 +1,150 @@
+package event;
+
+import java.awt.BorderLayout;
+import java.awt.EventQueue;
+
+import javax.swing.JFrame;
+import javax.swing.JPanel;
+import javax.swing.border.EmptyBorder;
+import java.awt.GridLayout;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
+
+import javax.swing.JButton;
+
+public class CalculatorJFrame extends JFrame {
+
+	private JPanel contentPane;
+	private JButton b1;
+	private JButton b2;
+	private JButton b3;
+	private JButton plusB;
+	private JButton b4;
+	private JButton b5;
+	private JButton b6;
+	private JButton minusB;
+	private JButton b7;
+	private JButton b8;
+	private JButton b9;
+	private JButton mulB;
+	private JButton b0;
+	private JButton equalB;
+	private JButton resetB;
+	private JButton divB;
+
+	/**
+	 * Launch the application.
+	 */
+	public static void main(String[] args) {
+		EventQueue.invokeLater(new Runnable() {
+			public void run() {
+				try {
+					CalculatorJFrame frame = new CalculatorJFrame();
+					frame.setVisible(true);
+				} catch (Exception e) {
+					e.printStackTrace();
+				}
+			}
+		});
+	}
+
+	/**
+	 * Create the frame.
+	 */
+	public CalculatorJFrame() {
+		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+		setBounds(100, 100, 306, 301);
+		contentPane = new JPanel();
+		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
+		setContentPane(contentPane);
+		contentPane.setLayout(new GridLayout(4, 4, 3, 3));
+		
+		b1 = new JButton("1");
+		contentPane.add(b1);
+		
+		b2 = new JButton("2");
+		contentPane.add(b2);
+		
+		b3 = new JButton("3");
+		contentPane.add(b3);
+		
+		plusB = new JButton("+");
+		contentPane.add(plusB);
+		
+		b4 = new JButton("4");
+		contentPane.add(b4);
+		
+		b5 = new JButton("5");
+		contentPane.add(b5);
+		
+		b6 = new JButton("6");
+		contentPane.add(b6);
+		
+		minusB = new JButton("-");
+		contentPane.add(minusB);
+		
+		b7 = new JButton("7");
+		contentPane.add(b7);
+		
+		b8 = new JButton("8");
+		contentPane.add(b8);
+		
+		b9 = new JButton("9");
+		contentPane.add(b9);
+		
+		mulB = new JButton("*");
+		contentPane.add(mulB);
+		
+		b0 = new JButton("0");
+		contentPane.add(b0);
+		
+		equalB = new JButton("=");
+		contentPane.add(equalB);
+		
+		resetB = new JButton("c");
+		contentPane.add(resetB);
+		
+		divB = new JButton("/");
+		contentPane.add(divB);
+		/*
+		 * event
+		 */
+		ButtonHandler bh = new ButtonHandler();
+		b1.addActionListener(bh);
+		b2.addActionListener(bh);
+		b3.addActionListener(bh);
+		b4.addActionListener(bh);
+		b5.addActionListener(bh);
+		b6.addActionListener(bh);
+		b7.addActionListener(bh);
+		b8.addActionListener(bh);
+		b9.addActionListener(bh);
+		b0.addActionListener(bh);
+		equalB.addActionListener(bh);
+		plusB.addActionListener(bh);
+		minusB.addActionListener(bh);
+		divB.addActionListener(bh);
+		mulB.addActionListener(bh);
+		
+	}
+	/*********************************************/
+	public class ButtonHandler implements ActionListener{
+		@Override
+		public void actionPerformed(ActionEvent e) {
+			System.out.println(e);
+		}
+		
+	}
+	/*********************************************/
+}
+
+
+
+
+
+
+
+
+
+
+

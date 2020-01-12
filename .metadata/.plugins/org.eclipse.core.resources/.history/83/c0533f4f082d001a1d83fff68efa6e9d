@@ -1,0 +1,31 @@
+package basic;
+
+import java.awt.Color;
+import java.awt.Frame;
+/*
+ GUI프로그래밍 방법
+ 	1. 컨테이너 클래스를 준비(Frame, Dialog, Window)& 객체생성
+ 	2. 컨테이너 객체 크기 설정  
+ 	3.	
+ 	4.
+ 	5. 컨테이너 객체를 (사용자에게) 보여주기
+ 
+ */
+
+public class FrameMain {
+	public static void main(String[] args) {
+		Frame f = new Frame();
+		f.setTitle("포함(의존성)에 의한 프레임 사용");
+		f.setBackground(Color.blue);
+		f.setSize(300, 400);
+		f.setVisible(true);
+		/*
+		 * Frame.setVisible(true)
+		 * 	- 호출되면 GUI(awt) 쓰레드생성
+		 *  - GUI 쓰레드는 무한 대기하면서
+		 *    GUI 이벤트 처리 , 그래픽 처리 담당한다.
+		 */
+		
+	}
+
+}

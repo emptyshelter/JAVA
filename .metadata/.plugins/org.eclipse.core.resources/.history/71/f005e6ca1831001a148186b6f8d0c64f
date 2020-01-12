@@ -1,0 +1,16 @@
+package web;
+
+import java.net.ServerSocket;
+
+public class WbeServerMain {
+
+	public static void main(String[] args) {
+		
+		ServerSocket serverSocket = new ServerSocket(80);
+		while (true) {
+			serverSocket.accept();
+		}
+
+	}
+
+}

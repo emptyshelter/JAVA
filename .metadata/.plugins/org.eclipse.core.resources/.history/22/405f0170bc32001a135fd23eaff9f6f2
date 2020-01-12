@@ -1,0 +1,28 @@
+package com.itwill.account;
+
+import java.sql.Connection;
+import java.sql.PreparedStatement;
+
+public class AccountDao2 {
+	public int insert(Account account) throws Exception {
+
+		Connection con = AccountFactory.getConnection();
+		String createSql = "insert into account values(?,?,?,?)";
+		PreparedStatement pstmt = con.prepareStatement(createSql);
+		int result = pstmt.executeUpdate();
+		return result;
+	}
+	public void readAll() {
+		
+	}
+	public void readOne() {
+		
+	}
+	public void update() {
+		
+	}
+	public void delete() {
+		
+	}
+
+}

@@ -1,0 +1,11 @@
+package basic;
+
+public class ChildFrameMain {
+
+	public static void main(String[] args) {
+		ChildFrame cf = new ChildFrame();
+		cf.setTitle("상속에 의한 프레임사용");
+
+	}
+
+}

@@ -1,0 +1,16 @@
+package dao.dept;
+
+import java.util.List;
+import java.util.Map;
+
+public class EmpDaoTestMain {
+
+	public static void main(String[] args) throws Exception {
+		EmpDao empDao = new EmpDaoImpl();
+		List<Map> empList = empDao.findEmpsWithDept();
+		for (Map rowMap : empList) {
+			System.out.println(rowMap);
+		}
+	}
+
+}

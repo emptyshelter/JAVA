@@ -1,0 +1,9 @@
+package client;
+
+public class InetAddressMain {
+
+	public static void main(String[] args) {
+
+	}
+
+}

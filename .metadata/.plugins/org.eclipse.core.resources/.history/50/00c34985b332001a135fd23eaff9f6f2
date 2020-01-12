@@ -1,0 +1,20 @@
+package com.itwill.account;
+
+public class AccountDao2 {
+	public void create() {
+		
+	}
+	public void readAll() {
+		
+	}
+	public void readOne() {
+		
+	}
+	public void update() {
+		
+	}
+	public void delete() {
+		
+	}
+
+}

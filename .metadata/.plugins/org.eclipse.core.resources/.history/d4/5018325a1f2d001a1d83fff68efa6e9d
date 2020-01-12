@@ -1,0 +1,9 @@
+package layout;
+
+public class BorderLayoutFrame {
+
+	public static void main(String[] args) {
+
+	}
+
+}

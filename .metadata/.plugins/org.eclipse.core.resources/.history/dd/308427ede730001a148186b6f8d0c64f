@@ -1,0 +1,12 @@
+import java.io.InputStream;
+
+public class InputStreamReadThreadBlockMain {
+
+	public static void main(String[] args) throws Exception {
+		InputStream consoleIn = System.in;
+		System.out.println("1.Thread blocking");
+		consoleIn.read();
+
+	}
+
+}

@@ -1,0 +1,86 @@
+package generic;
+import java.util.HashMap;
+import java.util.Iterator;
+import java.util.Set;
+
+public class GenericHashMapMain {
+	public static void main(String[] args) {
+		HashMap <String,Car>carMap = new HashMap<String,Car>();
+		System.out.println("map size: "+carMap.size());
+		System.out.println("************1.put**************");
+		Car c1 = new Car("1111",12);
+		carMap.put(c1.getNo(), c1);
+		carMap.put("2222",new Car("2222",13));
+		carMap.put("3333",new Car("3333",15));
+		carMap.put("4444",new Car("4444",17));
+		carMap.put("5555",new Car("5555",20));
+		System.out.println("map size: "+carMap.size());
+		System.out.println(carMap);
+		/*
+		 * Key∞¥√º∞° µø¿œ «œ∏È (equals) ∞¥√º∞° πŸ≤Ô¥Ÿ.
+		 */
+		System.out.println("map size: "+carMap.size());
+		carMap.put(new String("3333"),new Car("ªÔªÔªÔªÔ",18));
+		System.out.println(carMap);
+		System.out.println("************2-1.get**************");
+		Car getCar = (Car)carMap.get(new String("3333"));
+		getCar.setOutTime(22);
+		getCar.calculateFee();
+		getCar.print();
+		System.out.println("************2-2.remove**************");
+		Car removeCar =carMap.remove("3333");
+		System.out.println("map size: "+carMap.size());
+		System.out.println("************3.containskey**************");
+		if (carMap.containsKey("4444")) {
+			Car gCar = (Car)carMap.get("4444");
+			gCar.print();
+		}
+		System.out.println("************4.clear**************");
+//		carMap.clear();
+		System.out.println("map size: "+carMap.size());
+		System.out.println("************5.empty**************");
+		if (carMap.isEmpty()) {
+			System.out.println("carMap.isEmpty():"+carMap.isEmpty());
+		}
+		System.out.println("************Iteration**************");
+		Set <String>keyset = carMap.keySet();
+		Iterator <String>keyIter = keyset.iterator();
+		while (keyIter.hasNext()) {
+			String tempKey = (String)keyIter.next();
+//			System.out.println(tempKey);
+			Car tempCar = (Car)carMap.get(tempKey);
+			tempCar.print();
+		}
+		System.out.println("**********key[Wrapper,String]**********");
+		
+		HashMap <Integer,Car> carMap2 = new HashMap<Integer,Car>();
+		carMap2.put(1, new Car("1111",12));
+		carMap2.put(2, new Car("2222",17));
+		carMap2.put(3, new Car("3333",18));
+		carMap2.put(4, new Car("4444",19));
+		System.out.println(carMap2);
+		Car car = carMap2.get(1);
+		car.print();
+		carMap2.clear();
+		System.out.println("---------------------------------");
+		HashMap<Account, Car> carMap3=
+				new HashMap<Account, Car>();
+		Account acc1=new Account(1, "KIM", 34, .1);
+		carMap3.put(acc1, new Car("1111", 12));
+		carMap3.put(new Account(1, "KIM", 34, .1), new Car("2222", 17));
+		carMap3.put(new Account(1, "KIM", 34, .1), new Car("3333", 18));
+		carMap3.put(new Account(1, "KIM", 34, .1), new Car("4444", 19));
+		System.out.println(carMap3);
+		Car gCar=carMap3.get(acc1);
+		gCar.print();
+//		Account acc1 = new Account(1,"KIM",34,0.1);
+//		carMap2.put(acc1,new Car("1111",12));
+//		carMap2.put(new Account(1,"KIM",34,0.1),new Car("1111",12));
+//		carMap2.put(new Account(1,"KIM",34,0.1),new Car("1111",12));
+//		carMap2.put(new Account(1,"KIM",34,0.1),new Car("1111",12));
+//		System.out.println(carMap2);
+//		Car gCar= (Car)carMap2.get(acc1);
+//		gCar.print();
+	}
+
+}

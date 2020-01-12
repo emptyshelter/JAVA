@@ -1,0 +1,28 @@
+package dao.guest;
+/*
+   - insert
+   - selectByNo or selectById
+   - selectAll
+   - updateById or updateByNo
+   - deleteById or updateByNo
+ */
+public interface GuestDao {
+	/*
+	 * Create
+	 */
+	public int insertGuest ();
+	/*
+	 * Read
+	 */
+	public void selectByNo();
+	public void selectById();
+	public void selectByAll();
+	/*
+	 * Update
+	 */
+	
+	/*
+	 * Delete
+	 */
+
+}

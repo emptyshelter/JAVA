@@ -1,0 +1,45 @@
+package web;
+
+import java.io.FileInputStream;
+import java.io.FileOutputStream;
+import java.io.OutputStream;
+import java.io.OutputStreamWriter;
+import java.io.PrintWriter;
+import java.net.ServerSocket;
+import java.net.Socket;
+
+
+public class WebServerMain {
+
+	public static void main(String[] args) throws Exception{
+		
+		ServerSocket serverSocket=new ServerSocket(8787);
+		System.out.println("1.WebServer 80포트열고 클라이언트 요청처리대기");
+		while (true) {
+			Socket socket = serverSocket.accept();
+			/*
+			PrintWriter out=
+					new PrintWriter(
+							new OutputStreamWriter(
+									socket.getOutputStream()));
+			
+			System.out.println("2.WebServer 클라이언트에 html전송");
+			out.println("<h1>Hello WebServer!!!<h1>");
+			out.flush();
+			*/
+			OutputStream out=socket.getOutputStream();
+			FileInputStream fis=new FileInputStream("penguin1.gif");
+			while (true) {
+				int readByte=fis.read();
+				if(readByte==-1)break;
+				out.write(readByte);
+			}
+			out.flush();
+			socket.close();
+			
+		}
+		
+
+	}
+
+}

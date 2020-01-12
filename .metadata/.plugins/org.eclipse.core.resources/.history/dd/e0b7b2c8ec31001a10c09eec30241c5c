@@ -1,0 +1,21 @@
+package dao.address;
+
+import java.sql.Connection;
+import java.sql.DriverManager;
+
+public class AddressUpdatePKMain {
+
+	public static void main(String[] args) throws Exception {
+		String driverClass="oracle.jdbc.OracleDriver";
+		String url="jdbc:oracle:thin:@182.237.126.19:1521:XE";
+		String user="javaspring20";
+		String password="javaspring20";
+		String updateSql = "";
+		
+		Class.forName(driverClass);
+		Connection con = DriverManager.getConnection(url);
+		
+
+	}
+
+}

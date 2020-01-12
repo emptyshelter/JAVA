@@ -1,0 +1,8 @@
+package resultset;
+
+public class ResultSetScrollableUpdatableMain {
+	public static void main(String[] args) {
+		
+	}
+
+}

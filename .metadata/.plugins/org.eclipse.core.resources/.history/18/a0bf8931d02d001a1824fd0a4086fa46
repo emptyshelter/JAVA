@@ -1,0 +1,29 @@
+package event;
+
+import java.awt.BorderLayout;
+
+import javax.swing.JButton;
+import javax.swing.JFrame;
+
+public class ActionEventJFrame extends JFrame{
+	private JButton southB;
+	public ActionEventJFrame() {
+		southB = new JButton("이벤트소스 ");
+		this.getContentPane().setLayout(new BorderLayout());
+		this.getContentPane().add(southB,BorderLayout.SOUTH);
+	}
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	public static void main(String[] args) {
+		new ActionEventJFrame();
+	}
+
+}

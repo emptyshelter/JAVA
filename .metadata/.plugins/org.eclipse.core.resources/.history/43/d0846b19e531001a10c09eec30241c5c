@@ -1,0 +1,122 @@
+package statement;
+
+import java.sql.Connection;
+import java.sql.DriverManager;
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
+import java.sql.SQLException;
+import java.sql.Statement;
+
+/*
+<<PreparedStatement>>
+1. sql문작성
+    - ?(파라메타) 를 사용해서 나중에 외부에서 데이타(리터럴)를 받을수있게한다.
+      ex> insert into emp(empno,ename,job,manager,hiredate,sal,comm,deptno) values(?,?,?,?,?,?,?,?)	
+    - 테이블이름,컬럼이름등은 ? 를 사용해서 외부에서 입력받을수없다.
+      ex> select * from ? 
+          select ?,? from emp    
+2. PreparedStatement 객체생성시 인자로 sql문을 넣어서생성한다
+   ex> PreparedStatement pstmt = con.prepareStatement(sql);
+3. 생성된 PreparedStatement 객체에 파라메타를 setting 한다
+    - sql 좌측 ? 부터 1,2,3...
+   ex> 	pstmt.setInt(1,1234);              
+ 	   	pstmt.setString(2,"KIM");              
+   		pstmt.setString(3,"MANAGER");              
+  		pstmt.setInt(4,7839);              
+   		pstmt.setDate(5,new Date());              
+   		pstmt.setDouble(6,1000.12);              
+   		pstmt.setInt(7,0);              
+   		pstmt.setInt(8,10);              
+ 4.  실행
+    - 실행시 sql문을 인자로 넣지안는다.
+    ex> pstmt.executeUpdate();         
+        pstmt.executeQuery();         
+*/
+public class PreparedStatementMain {
+
+	public static void main(String[] args) throws Exception {
+		String driverClass="oracle.jdbc.OracleDriver";
+		String url="jdbc:oracle:thin:@182.237.126.19:1521:XE";
+		String user="javaspring20";
+		String password="javaspring20";
+		String selectSql="select * from emp";
+		Class.forName(driverClass);
+		
+		
+		int startSal = 1000;
+		int endSal = 9000;
+		String job="CLERK";
+		System.out.println("---------------SELECT(statement)-----------------");
+		String selectSql1="select empno,ename,job,sal,deptno from emp "
+				+ "where sal >= "+startSal+" and sal<="+endSal+" and job='"+job+"'";
+		Connection con=DriverManager.getConnection(url,user,password);
+		Statement stmt= con.createStatement();
+		ResultSet rs =stmt.executeQuery(selectSql1);
+		
+		while(rs.next()) {
+			int empno = rs.getInt("empno");
+			String ename=rs.getString("ename");
+			String jobs=rs.getString("job");
+			double sal=rs.getDouble("sal");
+			System.out.println(empno+"\t"+ename+"\t"+jobs+"\t"+sal);
+		}
+		rs.close();
+		stmt.close();
+		System.out.println("---------------SELECT(statement)-----------------");
+		String selectSql2="select empno,ename,job,sal,deptno from emp "
+				+ "where sal >= ? and sal<= ? and job= ?";
+		PreparedStatement pstmt = con.prepareStatement(selectSql2);
+		pstmt.setInt(1, startSal);
+		pstmt.setInt(2, endSal);
+		pstmt.setString(3, job);
+		rs = pstmt.executeQuery();
+		while (rs.next()) {
+			int empno = rs.getInt("empno");
+			String ename=rs.getString("ename");
+			String jobs=rs.getString("job");
+			double sal=rs.getDouble("sal");
+			System.out.println(empno+"\t"+ename+"\t"+jobs+"\t"+sal);
+		}
+		System.out.println("----------------PreparedStatement반복--------------");
+		startSal=1000;
+		endSal=5000;
+		job="SALESMAN";
+		pstmt.clearParameters();
+		pstmt.setInt(1, startSal);
+		pstmt.setInt(2, endSal);
+		pstmt.setString(3, job);
+		rs = pstmt.executeQuery();
+		while (rs.next()) {
+			int empno = rs.getInt("empno");
+			String ename=rs.getString("ename");
+			String jobs=rs.getString("job");
+			double sal=rs.getDouble("sal");
+			System.out.println(empno+"\t"+ename+"\t"+jobs+"\t"+sal);
+		}
+		rs.close();
+		pstmt.close();
+		System.out.println("------------------insert(PreparedStatement)-----------)");
+		String insetSql1="insert into emp values(9000,'ALICE','CLERK',7499,sysdate,5600,0,10)";
+		String insetSql2="insert into emp values(?,?,?,?,?,?,?,?,)";
+		String insetSql3="insert into emp values(?,?,?,?,to_date(?,'YYYY-MM-DD'),?,?,?,)";
+		pstmt = con.prepareStatement(insetSql1);
+		int insertRowCount = pstmt.executeUpdate();
+		pstmt = con.prepareStatement(insetSql2);
+		pstmt = con.prepareStatement(insetSql3);
+		
+		
+	}
+
+}
+
+
+
+
+
+
+
+
+
+
+
+

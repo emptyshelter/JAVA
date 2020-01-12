@@ -1,0 +1,21 @@
+package com.itwill.account;
+
+import java.sql.Connection;
+import java.sql.PreparedStatement;
+
+import com.itwill.account.factory.AccountFactory;
+
+public class AccountTableCreate {
+	public static void main(String[] args) throws Exception {
+		Connection con = AccountFactory.getConnection();
+		String createSql =  "create table Account(no number(20)primary key, owner varchar2(20),balance number(10), iyul number(6,2))";
+		PreparedStatement pstmt = con.prepareStatement(createSql);
+		int result = pstmt.executeUpdate();
+		System.out.println(result +"개의 테이블이 생성되었습니다.");
+		pstmt.close();
+		AccountFactory.releaseConnection(con);
+		
+	}
+	
+
+}

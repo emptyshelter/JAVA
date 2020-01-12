@@ -1,0 +1,202 @@
+package event;
+
+import java.awt.BorderLayout;
+import java.awt.EventQueue;
+
+import javax.swing.JFrame;
+import javax.swing.JPanel;
+import javax.swing.border.EmptyBorder;
+
+import event.CalculatorJFrame.ButtonHandler;
+
+import java.awt.GridLayout;
+import javax.swing.JTextField;
+import javax.swing.JButton;
+import javax.swing.JTextArea;
+import java.awt.Toolkit;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
+
+public class CalculatorJFrame2 extends JFrame {
+
+	private JPanel contentPane;
+	private JTextField textField;
+	String firstOp="";
+	String secondOp="";
+	int first=0;
+	int second=0;
+	Double result=0.0;
+	String operator="";
+	String displayStr="";
+
+	/**
+	 * Launch the application.
+	 */
+	public static void main(String[] args) {
+		EventQueue.invokeLater(new Runnable() {
+			public void run() {
+				try {
+					CalculatorJFrame2 frame = new CalculatorJFrame2();
+					frame.setVisible(true);
+				} catch (Exception e) {
+					e.printStackTrace();
+				}
+			}
+		});
+	}
+
+	/**
+	 * Create the frame.
+	 */
+	public CalculatorJFrame2() {
+		setIconImage(Toolkit.getDefaultToolkit().getImage("C:\\JAVA_SPRING\\01.JAVA_FUNDMENTAL\\99.image\\default1.png"));
+		setTitle("Calculator");
+		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+		setBounds(100, 100, 400, 390);
+		contentPane = new JPanel();
+		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
+		contentPane.setLayout(new BorderLayout(0, 0));
+		setContentPane(contentPane);
+		
+		JPanel northP = new JPanel();
+		contentPane.add(northP, BorderLayout.NORTH);
+		northP.setLayout(new GridLayout(0, 1, 0, 0));
+		
+		textField = new JTextField();
+		northP.add(textField);
+		textField.setColumns(10);
+		
+		JPanel centerP = new JPanel();
+		contentPane.add(centerP, BorderLayout.CENTER);
+		centerP.setLayout(new GridLayout(4, 4, 3, 3));
+		
+		JButton b7 = new JButton("7");
+		centerP.add(b7);
+		
+		JButton b8 = new JButton("8");
+		centerP.add(b8);
+		
+		JButton b9 = new JButton("9");
+		centerP.add(b9);
+		
+		JButton divB = new JButton("/");
+		centerP.add(divB);
+		
+		JButton b4 = new JButton("4");
+		centerP.add(b4);
+		
+		JButton b5 = new JButton("5");
+		centerP.add(b5);
+		
+		JButton b6 = new JButton("6");
+		centerP.add(b6);
+		
+		JButton mulB = new JButton("*");
+		centerP.add(mulB);
+		
+		JButton b1 = new JButton("1");
+		centerP.add(b1);
+		
+		JButton b2 = new JButton("2");
+		centerP.add(b2);
+		
+		JButton b3 = new JButton("3");
+		centerP.add(b3);
+		
+		JButton minusB = new JButton("-");
+		centerP.add(minusB);
+		
+		JButton b0 = new JButton("0");
+		centerP.add(b0);
+		
+		JButton resetB = new JButton("C");
+		centerP.add(resetB);
+		
+		JButton equalB = new JButton("=");
+		centerP.add(equalB);
+		
+		JButton plusB = new JButton("+");
+		centerP.add(plusB);
+		ButtonHandler bh=new ButtonHandler();
+		b1.addActionListener(bh);
+		b2.addActionListener(bh);
+		b3.addActionListener(bh);
+		b4.addActionListener(bh);
+		b5.addActionListener(bh);
+		b6.addActionListener(bh);
+		b7.addActionListener(bh);
+		b8.addActionListener(bh);
+		b9.addActionListener(bh);
+		b0.addActionListener(bh);
+		plusB.addActionListener(bh);
+		minusB.addActionListener(bh);
+		divB.addActionListener(bh);
+		equalB.addActionListener(bh);
+		resetB.addActionListener(bh);
+		mulB.addActionListener(bh);
+	}
+	
+
+	
+	/*
+	 * event
+	 */
+	public class ButtonHandler implements ActionListener{
+
+		@Override
+		public void actionPerformed(ActionEvent e) {
+			String cmd = e.getActionCommand();
+//			JButton source = (JButton) e.getSource();
+//			String text = source.getText();
+//			if (cmd.equals("1")) {
+//				displayStr+="1";
+//			}else if (cmd.equals("2")) {
+//				displayStr+="2";
+//			}else if (cmd.equals("3")) {
+//				displayStr+="3";
+//			}else if (cmd.equals("4")) {
+//			displayStr+="4";
+//			}else if (cmd.equals("5")) {
+//				displayStr+="5";
+//			}else if (cmd.equals("6")) {
+//				displayStr+="6";
+//			}else if (cmd.equals("7")) {
+//				displayStr+="7";
+//			}else if (cmd.equals("8")) {
+//				displayStr+="8";
+//			}else if (cmd.equals("9")) {
+//				displayStr+="9";
+//			}else if (cmd.equals("0")) {
+//				displayStr+="0";
+//			}else if (cmd.equals("+")) {
+//			}else if (cmd.equals("-")) {
+//			}else if (cmd.equals("*")) {
+//			}else  if (cmd.equals("/")) {
+//			}else  if (cmd.equals("=")) {
+//				first=Integer.parseInt(firstOp);
+//				second=Integer.parseInt(secondOp);
+//				result = first+second;
+//				displayStr=result+"";
+//			}
+			
+			if (cmd.equals("=")) {
+				
+				if (operator.equals("+")) {
+					result = 
+				}
+				
+			}else {
+				if (secondOp.equals("") && operator.equals("")) {
+					firstOp+=cmd;
+					textField.setText(firstOp);
+				}else if (firstOp.equals("")&& operator.equals(("")){
+					secondOp+=cmd;
+					textField.setText(secondOp);
+				}
+			}
+		}
+		
+	}
+	
+
+}

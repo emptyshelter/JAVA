@@ -1,0 +1,16 @@
+package dao.address;
+
+public class AddressDao2TestMain {
+
+	public static void main(String[] args) throws Exception {
+		AddressDao2 addressdao2= new AddressDao2();
+		addressdao2.insert("ttt","╠Х╧неб","2341-3119","LA");
+		addressdao2.update();
+		addressdao2.delete();
+		addressdao2.selectByPk();
+		addressdao2.selectAll();
+		
+
+	}
+
+}

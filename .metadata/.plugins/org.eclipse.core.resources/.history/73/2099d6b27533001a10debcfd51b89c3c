@@ -1,0 +1,22 @@
+package dao.dept;
+
+import java.util.List;
+import java.util.Map;
+
+public class EmpDaoTestMain {
+
+	public static void main(String[] args) throws Exception {
+		EmpDao empDao = new EmpDaoImpl();
+		List<Map> empList = empDao.findEmpsWithDept();
+		for (Map rowMap : empList) {
+			int empno = (int) rowMap.get("empno");
+			String ename = (String) rowMap.get("ename");
+			String job = (String) rowMap.get("job");
+			double sal = (double) rowMap.get("sal");
+			String dname = (String) rowMap.get("dname");
+			String loc = (String) rowMap.get("loc");
+			System.out.println(empno +"\t"+ename+"\t"+job+"\t"+sal+"\t"+dname+"\t"+loc);
+		}
+	}
+
+}

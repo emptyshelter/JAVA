@@ -1,0 +1,9 @@
+package dao.address;
+
+public class AddressDeleteMain {
+
+	public static void main(String[] args) {
+
+	}
+
+}

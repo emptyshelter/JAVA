@@ -1,0 +1,176 @@
+package chat.server;
+
+import java.awt.BorderLayout;
+import java.awt.EventQueue;
+import java.io.DataInputStream;
+import java.io.DataOutputStream;
+import java.io.IOException;
+import java.net.ServerSocket;
+import java.net.Socket;
+import java.util.ArrayList;
+
+import javax.swing.JButton;
+import javax.swing.JFrame;
+import javax.swing.JOptionPane;
+import javax.swing.JPanel;
+import javax.swing.JScrollPane;
+import javax.swing.JTextArea;
+import javax.swing.JTextField;
+import javax.swing.border.EmptyBorder;
+
+public class ChatServerFrame extends JFrame {
+
+	private JPanel contentPane;
+	private JScrollPane scrollPane;
+	private JTextArea displayTA;
+	private JTextField noticeTF;
+	/************************************/
+	private ServerClientService clientService;
+	private ChatServerThread chatServerThread;
+	/*************************************/
+	/**
+	 * Launch the application.
+	 */
+	public static void main(String[] args) {
+		EventQueue.invokeLater(new Runnable() {
+			public void run() {
+				try {
+					ChatServerFrame frame = new ChatServerFrame();
+					frame.setVisible(true);
+					frame.noticeTF.requestFocus();
+				} catch (Exception e) {
+					e.printStackTrace();
+				}
+			}
+		});
+	}
+
+	/**
+	 * Create the frame.
+	 */
+	public ChatServerFrame() {
+		setTitle("ChatServer");
+		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+		setBounds(100, 100, 536, 341);
+		contentPane = new JPanel();
+		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
+		contentPane.setLayout(new BorderLayout(0, 0));
+		setContentPane(contentPane);
+		
+		scrollPane = new JScrollPane();
+		contentPane.add(scrollPane, BorderLayout.CENTER);
+		
+		displayTA = new JTextArea();
+		scrollPane.setViewportView(displayTA);
+		
+		JPanel panel = new JPanel();
+		contentPane.add(panel, BorderLayout.SOUTH);
+		
+		noticeTF = new JTextField();
+		panel.add(noticeTF);
+		noticeTF.setColumns(38);
+		
+		JButton btnNotice = new JButton("notice");
+		panel.add(btnNotice);
+		
+		clientService=new ServerClientService();
+		chatServerThread=new ChatServerThread();
+		chatServerThread.start();
+	}
+	private void displayLog(String msg) {
+		displayTA.append(msg+"\n");
+		int maxSize = 
+				scrollPane.getVerticalScrollBar().getMaximum();
+		scrollPane.getVerticalScrollBar().setValue(maxSize);
+	}
+	
+	/***********************************************
+	 * 특정포트를 열고 클라이언트의 소켓연결요청을
+	 * 처리해서소켓을생성하는쓰레드클래스
+	 ***********************************************/
+	public class ChatServerThread extends Thread{
+		@Override
+		public void run() {
+			try {
+				ServerSocket serverSocket=new ServerSocket(1987);
+				displayLog("0.ChatServerThread:1987번포트에 ServerSocket생성");
+				while (true) {
+					displayLog("1.ChatServerThread:클라이언트소켓연결요청대기");
+					Socket socket = 
+							serverSocket.accept();
+					displayLog("2.ChatServerThread:접속클라이언트["+
+							socket.getInetAddress().getHostAddress()+"("+
+							socket.getPort()+")]");
+					clientService.addClient(socket);
+					
+				}
+			}catch (Exception e) {
+				JOptionPane.showMessageDialog(null, e.getMessage());
+			}
+		}
+	}
+	/*************************************************************/
+	/********************************************
+	  한명의 클라이언트와통신을 담당하는 클래스(VO)
+		- 클라이언트와연결된 소켓1개를 가지고있는클래스
+		- 클라이언트의 정보를 가지고있는 클래스
+		- 클라이언트당 1개의객체가생성
+	 ********************************************/
+	public class ServerClient {
+		private String id;
+		private Socket socket;
+		private DataInputStream in;
+		private DataOutputStream out;
+		public ServerClient(Socket socket) throws Exception {
+			this.socket = socket;
+			this.id = socket.getInetAddress()
+					.getHostAddress()+"["+socket.getPort()+"]";
+			this.in = new DataInputStream(socket.getInputStream());
+			this.out = new DataOutputStream(socket.getOutputStream());
+		}
+		public String getUserId() {
+			return id;
+		}
+		public void send() {
+			this.out.writeUTF();
+		}
+	}
+	/************************************
+	 서버에연결된 클라이언트객체(Service)를관리할클래스  
+	  - 클라이언트객체 추가
+	  - 클라이언트객체 찾기
+	  - 클라이언트객체 삭제
+	  - 모든 클라이언트객체에 데이타전송
+	 ************************************/
+	public class ServerClientService{
+		/*
+		 * 클라이언트객체 리스트
+		 */
+		private ArrayList clientList;
+		public ServerClientService() {
+			clientList=new ArrayList();
+		}
+		/*
+		 * 클라이언트객체추가
+		 */
+		public void addClient(Socket socket) {
+			clientList.add(socket);
+			displayLog("A.ServerClientService:현재 접속자수:" + clientList.size());
+		}
+		
+	}
+	
+}
+
+
+
+
+
+
+
+
+
+
+
+
+

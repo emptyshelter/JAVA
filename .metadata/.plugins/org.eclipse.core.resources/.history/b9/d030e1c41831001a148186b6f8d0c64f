@@ -1,0 +1,9 @@
+package web;
+
+public class WbeServerMain {
+
+	public static void main(String[] args) {
+
+	}
+
+}

@@ -1,0 +1,19 @@
+
+public class OuterClass2 {
+	public int outer_class_member_field;
+	public void outer_class_method1() {
+		
+	}
+	/*******************inner Class***********************/
+	public class ObjectChildInnerClass extends Object{
+		@Override
+		public String toString() {
+			return "난 오브젝트 자식클래스이다.";
+		}
+	}
+	public static void main(String[] args) {
+		OuterClass2 oc2 = new OuterClass2();
+		System.out.println(oc2.toString());
+	}
+
+}

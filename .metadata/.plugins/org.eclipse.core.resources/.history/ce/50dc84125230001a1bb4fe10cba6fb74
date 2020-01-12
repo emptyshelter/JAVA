@@ -1,0 +1,10 @@
+package client;
+
+import java.net.Socket;
+
+public class ClientSocketMain {
+	public static void main(String[] args) {
+		Socket socket = new Socket(3333);
+	}
+
+}

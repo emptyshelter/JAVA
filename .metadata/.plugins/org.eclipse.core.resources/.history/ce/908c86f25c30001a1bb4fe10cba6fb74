@@ -1,0 +1,114 @@
+package server;
+
+import java.awt.BorderLayout;
+import java.awt.EventQueue;
+
+import javax.swing.JFrame;
+import javax.swing.JPanel;
+import javax.swing.border.EmptyBorder;
+import javax.swing.JScrollPane;
+import javax.swing.JTextArea;
+import java.awt.Color;
+import java.awt.Font;
+import java.io.BufferedReader;
+import java.io.IOException;
+import java.io.InputStreamReader;
+import java.io.OutputStreamWriter;
+import java.io.PrintWriter;
+import java.net.ServerSocket;
+import java.net.Socket;
+import java.util.Date;
+
+public class EchoServerFrame extends JFrame {
+
+	private JPanel contentPane;
+	private JTextArea displayTA;
+	private JScrollPane scrollPane;
+
+	/**
+	 * Launch the application.
+	 */
+	public static void main(String[] args) {
+		EventQueue.invokeLater(new Runnable() {
+			public void run() {
+				try {
+					EchoServerFrame frame = new EchoServerFrame();
+					frame.setVisible(true);
+				} catch (Exception e) {
+					e.printStackTrace();
+				}
+			}
+		});
+	}
+
+	/**
+	 * Create the frame.
+	 */
+	public EchoServerFrame() {
+		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+		setBounds(100, 100, 450, 300);
+		contentPane = new JPanel();
+		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
+		contentPane.setLayout(new BorderLayout(0, 0));
+		setContentPane(contentPane);
+		
+		scrollPane = new JScrollPane();
+		contentPane.add(scrollPane, BorderLayout.CENTER);
+		
+		displayTA = new JTextArea();
+		displayTA.setFont(new Font("D2Coding", Font.BOLD, 17));
+		displayTA.setForeground(Color.WHITE);
+		displayTA.setBackground(Color.BLACK);
+		scrollPane.setViewportView(displayTA);
+		/****************************/
+		new EchoServerThread().start();
+		/****************************/
+		
+	}
+	private void displayLog(String log) {
+		displayTA.append(log+"\n");
+		int maxLocation=
+				scrollPane.getVerticalScrollBar().getMaximum();
+		scrollPane.getVerticalScrollBar().setValue(maxLocation);
+		
+	}
+	/**************************EchoServerThread*************************/
+	public class EchoServerThread extends Thread{
+		@Override
+		public void run() {
+			while(true) {
+				
+				try {
+					displayLog("0.EchoServerThread: ServerSocket생성(9999)");
+					ServerSocket serverSocket = new ServerSocket(9999);
+					while (true) {
+						displayLog("1.EchoServerThread: 클라이언트 연결 요청대기(쓰레드대기)");
+						Socket socket = serverSocket.accept();
+						displayLog("2.EchoServerThread: 클라이언트와 연결된 서버쪽 소켓생성"+socket);
+						BufferedReader in = 
+								new BufferedReader(
+										new InputStreamReader(
+												socket.getInputStream()));
+								
+						PrintWriter out=
+								new PrintWriter(
+										new OutputStreamWriter(
+												socket.getOutputStream()));
+						Date now=new Date();
+						String timeStr = now.toLocaleString();
+						out.println("민태Server["+socket.getLocalAddress().getHostAddress()+"]:"+timeStr);
+						out.flush();
+						
+						socket.close();
+					}
+				} catch (IOException e1) {
+					// TODO Auto-generated catch block
+					e1.printStackTrace();
+				}
+			}
+		}
+	}
+	/*******************************************************/
+	
+
+}

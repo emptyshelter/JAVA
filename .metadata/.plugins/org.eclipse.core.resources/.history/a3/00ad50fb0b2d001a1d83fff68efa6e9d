@@ -1,0 +1,19 @@
+package layout;
+
+import java.awt.Frame;
+
+public class NullLayoutFrame extends Frame{
+	public NullLayoutFrame() {
+		setSize(300, 400);
+	}
+	
+	
+	
+	
+	
+	
+	public static void main(String[] args) {
+		new NullLayoutFrame();
+	}
+
+}

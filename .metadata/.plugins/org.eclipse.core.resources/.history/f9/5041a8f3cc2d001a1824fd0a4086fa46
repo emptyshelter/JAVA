@@ -1,0 +1,59 @@
+
+public class OuterClass2 {
+	public int outer_class_member_field;
+	public void outer_class_method1() {
+		ObjectChildInnerClass oci=new ObjectChildInnerClass();
+		System.out.println(oci.toString());
+		InterfaceAImpl aimpl=new InterfaceAImpl();
+		aimpl.method1();
+	}
+	public void outer_class_method2() {
+		Object oc = new Object() {
+			@Override
+			public String toString() {
+				return "난 오브젝트 자식클래스이다.[anonymous local inner class]";
+			}
+		};
+		System.out.println(oc.toString());
+		Object oc2 = new Object();
+		InterfaceA ia = new InterfaceA() {
+			@Override
+			public void method1() {
+				System.out.println("InterFaceA.method1() 구현:"+this);
+				
+			}
+		}; 
+		ia.method1();
+		InterfaceA ia2 = new InterfaceA() {
+			
+			@Override
+			public void method1() {
+			}
+		};
+	}
+	
+	/**************inner class1****************/
+	public class ObjectChildInnerClass extends Object{
+		@Override
+		public String toString() {
+			// TODO Auto-generated method stub
+			return "난 오브젝트 자식클래스이다.[member inner class]";
+		}
+	}
+	/**************inner class2****************/
+	public class InterfaceAImpl implements InterfaceA{
+
+		@Override
+		public void method1() {
+			System.out.println("InterFaceA.method1() 구현:"+this);
+			
+		}
+		
+	}
+	public static void main(String[] args) {
+		OuterClass2 oc2=new OuterClass2();
+		oc2.outer_class_method1();
+		oc2.outer_class_method2();
+	}
+	
+}

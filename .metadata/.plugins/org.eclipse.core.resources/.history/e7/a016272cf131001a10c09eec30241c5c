@@ -1,0 +1,14 @@
+package dao.address;
+
+public class AddressDeletePKMain {
+
+	public static void main(String[] args) {
+		String driverClass="oracle.jdbc.OracleDriver";
+		String url="jdbc:oracle:thin:@182.237.126.19:1521:XE";
+		String user="javaspring20";
+		String password="javaspring20";
+		String deleteSql = "";
+
+	}
+
+}

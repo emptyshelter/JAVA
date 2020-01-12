@@ -1,0 +1,181 @@
+package chat.client;
+
+import java.awt.BorderLayout;
+import java.awt.EventQueue;
+
+import javax.swing.JFrame;
+import javax.swing.JOptionPane;
+import javax.swing.JPanel;
+import javax.swing.border.EmptyBorder;
+import javax.swing.JTextField;
+import javax.swing.JScrollPane;
+import javax.swing.JTextArea;
+import java.awt.event.ActionListener;
+import java.io.BufferedReader;
+import java.io.DataInputStream;
+import java.io.DataOutputStream;
+import java.io.IOException;
+import java.io.InputStreamReader;
+import java.io.OutputStream;
+import java.io.OutputStreamWriter;
+import java.io.PrintWriter;
+import java.net.Socket;
+import java.net.UnknownHostException;
+import java.awt.event.ActionEvent;
+import javax.swing.JButton;
+
+public class ChatClientFrame extends JFrame {
+
+	private JPanel contentPane;
+	private JTextField chatTF;
+	private JTextArea displayTA;
+	private JPanel panel;
+	private JButton btnSend;
+	/*********************/
+	private ClientClient client;
+	private JScrollPane scrollPane;
+	/**
+	 * Launch the application.
+	 */
+	public static void main(String[] args) {
+		EventQueue.invokeLater(new Runnable() {
+			public void run() {
+				try {
+					ChatClientFrame frame = new ChatClientFrame();
+					frame.setVisible(true);
+					frame.chatTF.requestFocus();
+				} catch (Exception e) {
+					e.printStackTrace();
+				}
+			}
+		});
+	}
+
+	/**
+	 * Create the frame.
+	 * @throws Exception 
+	 */
+	public ChatClientFrame() throws Exception {
+		setTitle("ChatClient");
+		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+		setBounds(100, 100, 504, 324);
+		contentPane = new JPanel();
+		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
+		contentPane.setLayout(new BorderLayout(0, 0));
+		setContentPane(contentPane);
+		
+		scrollPane = new JScrollPane();
+		contentPane.add(scrollPane, BorderLayout.CENTER);
+		
+		displayTA = new JTextArea();
+		displayTA.setEditable(false);
+		scrollPane.setViewportView(displayTA);
+		
+		panel = new JPanel();
+		contentPane.add(panel, BorderLayout.SOUTH);
+		
+		chatTF = new JTextField();
+		panel.add(chatTF);
+		chatTF.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				try {
+					sendMessage();
+				} catch (Exception e1) {
+					e1.printStackTrace();
+				}
+			}
+		});
+		chatTF.setColumns(36);
+		
+		btnSend = new JButton("send");
+		btnSend.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				try {
+					sendMessage();
+				} catch (Exception e1) {
+					e1.printStackTrace();
+				}
+			}
+		});
+		panel.add(btnSend);
+		
+		client=new ClientClient();
+		client.start();
+		setTitle(client.getUserId()+" 님 안녕하세요!!");
+		
+	}
+	private void sendMessage() throws Exception{
+		String chatStr = chatTF.getText().trim();
+		if (chatStr == null ||chatStr.equals("")) {
+			chatTF.requestFocus();
+			return;
+		}
+		client.send("["+client.getUserId()+"] "+chatStr);
+		chatTF.setText("");
+		chatTF.requestFocus();
+	}
+	private void displayMessage(String msg) {
+		displayTA.append(msg+"\n");
+		
+		int maxSize=scrollPane.getVerticalScrollBar().getMaximum();
+		scrollPane.getVerticalScrollBar().setValue(maxSize);
+	}
+	
+	/*****************************************************
+	 클라이언트쪽소켓을 사용하여 서버와 통신을 담당하는 클래스(VO)
+    - 서버와연결된 소켓1개를 가지고있는클래스
+	- 클라이언트의 정보를 가지고있는 클래스
+	- 클라이언트당 1개의객체가생성 
+	 ****************************************************/
+	public class ClientClient extends Thread{
+		private Socket socket;
+		private String id;
+		private DataInputStream in;
+		private DataOutputStream out;
+		public ClientClient() throws Exception{
+			this.socket=new Socket("192.168.15.20",1987);
+			this.id = socket.getLocalAddress()
+					.getHostAddress()+
+					"["+socket.getLocalPort()+"]";
+			this.in=new DataInputStream(socket.getInputStream());
+			this.out=new DataOutputStream(socket.getOutputStream());
+		}
+		public String getUserId() {
+			return id;
+		}
+		public void send(String msg) throws Exception{
+			out.writeUTF(msg);
+		}
+		@Override
+		public void run() throws RuntimeException{
+			try {
+				while (true) {
+					System.out.println("가.ClientClient: "
+							+ "서버로부터 오는데이타를 읽기위해 쓰레드 무한대기");
+					String readData = in.readUTF();
+					System.out.println("나.ClientClient: "
+							+ "서버로부터 읽은데이타를 클라이언트 채팅창에보여준다.");
+					displayMessage(readData);
+				}
+			}catch (Exception e) {
+				//e.printStackTrace();
+				JOptionPane.showMessageDialog(null, e.getMessage());
+				System.exit(0);
+			}
+		}
+	}
+	
+}
+
+
+
+
+
+
+
+
+
+
+
+
+

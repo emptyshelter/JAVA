@@ -1,0 +1,13 @@
+package layout;
+
+import java.awt.Frame;
+
+public class FlowLayoutFrame extends Frame{
+	public FlowLayoutFrame() {
+		// TODO Auto-generated constructor stub
+	}
+	public static void main(String[] args) {
+		new FlowLayoutFrame();
+	}
+
+}

@@ -1,0 +1,72 @@
+package layout.swing;
+
+import java.awt.BorderLayout;
+import java.awt.EventQueue;
+
+import javax.swing.JFrame;
+import javax.swing.JPanel;
+import javax.swing.border.EmptyBorder;
+import javax.swing.JLabel;
+import javax.swing.JTextArea;
+import javax.swing.JPasswordField;
+import javax.swing.JButton;
+
+public class NullLayoutJFrame extends JFrame {
+
+	private JPanel contentPane;
+	private JPasswordField passTF;
+	private JButton btnLogin;
+	private JButton btnCancle;
+
+	/**
+	 * Launch the application.
+	 */
+	public static void main(String[] args) {
+		EventQueue.invokeLater(new Runnable() {
+			public void run() {
+				try {
+					NullLayoutJFrame frame = new NullLayoutJFrame();
+					frame.setVisible(true);
+				} catch (Exception e) {
+					e.printStackTrace();
+				}
+			}
+		});
+	}
+
+	/**
+	 * Create the frame.
+	 */
+	public NullLayoutJFrame() {
+		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+		setBounds(100, 100, 450, 300);
+		contentPane = new JPanel();
+		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
+		setContentPane(contentPane);
+		contentPane.setLayout(null);
+		
+		JLabel lbL = new JLabel("\uC544\uC774\uB514");
+		lbL.setBounds(62, 62, 57, 15);
+		contentPane.add(lbL);
+		
+		JLabel label = new JLabel("\uBE44\uBC00\uBC88\uD638");
+		label.setBounds(62, 112, 57, 15);
+		contentPane.add(label);
+		
+		JTextArea idTF = new JTextArea();
+		idTF.setBounds(186, 58, 132, 24);
+		contentPane.add(idTF);
+		
+		passTF = new JPasswordField();
+		passTF.setBounds(186, 109, 132, 21);
+		contentPane.add(passTF);
+		
+		btnLogin = new JButton("LOGIN");
+		btnLogin.setBounds(64, 217, 97, 23);
+		contentPane.add(btnLogin);
+		
+		btnCancle = new JButton("CANCLE");
+		btnCancle.setBounds(221, 217, 97, 23);
+		contentPane.add(btnCancle);
+	}
+}

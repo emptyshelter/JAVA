@@ -1,0 +1,27 @@
+package layout;
+
+import java.awt.BorderLayout;
+import java.awt.Frame;
+
+public class PanelFrame extends Frame {
+	public PanelFrame() {
+		
+		
+		setLayout(new BorderLayout());
+		setSize(300, 400);
+		setVisible(true);
+	}
+	
+	
+	
+	
+	
+	
+	
+	
+	public static void main(String[] args) {
+		
+	}
+
+
+}

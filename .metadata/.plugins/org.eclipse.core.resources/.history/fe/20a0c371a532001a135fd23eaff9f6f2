@@ -1,0 +1,10 @@
+package resultset;
+
+public class ResultSetMetaDataMain {
+
+	public static void main(String[] args) {
+		// TODO Auto-generated method stub
+
+	}
+
+}

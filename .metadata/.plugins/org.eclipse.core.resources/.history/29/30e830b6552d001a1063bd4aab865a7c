@@ -1,0 +1,163 @@
+package com.itwill.member;
+
+import java.io.File;
+import java.io.FileInputStream;
+import java.io.FileNotFoundException;
+import java.io.FileOutputStream;
+import java.io.IOException;
+import java.io.ObjectInputStream;
+import java.io.ObjectOutputStream;
+import java.util.ArrayList;
+
+/*
+Dao(Data Access Object)
+ - 멤버들의 데이터를 저장하고있는 파일(테이블)에
+   CRUD(Create, Read, Update, Delete) 작업을 할수있는
+   단위메쏘드를 가지고있는 클래스
+
+ - MemberService객체의 요청(메쏘드호출)을 받아서 
+   Data Access(File, DB)에 관련된 단위기능(CRUD)을
+   수행하는 객체
+ */
+public class MemberDao {
+	private File memberFile;
+	ArrayList<Member> memberList;
+	public MemberDao() throws Exception {
+		init();
+	}
+	private void init() throws Exception{
+		memberFile = new File("members.ser");
+		if (!memberFile.exists()) {
+			ObjectOutputStream oos = 
+					new ObjectOutputStream(
+							new FileOutputStream(memberFile));
+			oos.writeObject(new ArrayList<Member>());
+		}else {
+			System.out.println("members.ser 파일이 존재합니다.");
+		}
+	}
+	private ArrayList<Member> readFile() throws Exception {
+		ObjectInputStream ois = 
+				new ObjectInputStream(
+						new FileInputStream(memberFile));
+		ArrayList<Member> memberList = (ArrayList<Member>)ois.readObject();
+		ois.close();
+		return memberList;
+	}
+	private void writeFile(ArrayList<Member> memberList) throws Exception{
+		ObjectOutputStream oos = 
+				new ObjectOutputStream(
+						new FileOutputStream(memberFile));
+		oos.writeObject(memberList);
+		oos.close();
+	}
+	public boolean isDuplicateId(String id) throws Exception{
+		ArrayList<Member> memberList = this.readFile();
+		for (Member member : memberList) {
+			if (member.getId().equals(id)) {
+				return true;
+			}
+		}
+		return false;
+	}
+	
+	/*
+	 * Create
+	 */
+	public void create(Member member) throws Exception {
+		ArrayList<Member> memberList = this.readFile();
+		memberList.add(member);
+		this.writeFile(memberList);
+	}
+	/*
+	 * Read
+	 */
+	public ArrayList<Member> readAll() throws Exception {
+		ArrayList<Member> memberList = this.readFile();
+		return memberList;
+	}
+
+	
+	/*
+	 * Read
+	 */
+	public Member readOne(String id) throws Exception {
+		ArrayList<Member> memberList = this.readFile();
+		Member findMember = null;
+		for (Member member : memberList) {
+			if (member.getId().equals(id)) {
+				findMember = member;
+			}
+		}
+		return findMember;
+	}
+	/*
+	 * Name
+	 */
+	public Member findName(String name) throws Exception {
+		ArrayList<Member> memberList = this.readFile();
+		Member findMember = null;
+		for (Member member : memberList) {
+			if (member.getName().equals(name)) {
+				findMember = member;
+			}
+		}
+		return findMember;
+	}
+	
+	/*
+	 * Address
+	 */
+	public Member findAddress(String Address) throws Exception {
+		ArrayList<Member> memberList = this.readFile();
+		Member findMember = null;
+		for (Member member : memberList) {
+			if (member.getAddress().equals(Address)) {
+				findMember = member;
+			}
+		}
+		return findMember;
+	}
+	/*
+	 * Age
+	 */
+	public Member findAge(int age) throws Exception {
+		ArrayList<Member> memberList = this.readFile();
+		Member findMember = null;
+		for (Member member : memberList) {
+			if (member.getAge()==age) {
+				findMember = member;
+			}
+		}
+		return findMember;
+	}
+
+	/*
+	 * Update
+	 */
+	public void update(Member updateMember) throws Exception {
+		ArrayList<Member> memberList = this.readFile();
+		for (int i = 0; i < memberList.size(); i++) {
+			if (memberList.get(i).getId().equals(updateMember.getId())) {
+				memberList.set(i, updateMember);
+				this.writeFile(memberList);
+				break;
+			}
+		}
+
+	}
+	/*
+	 * Delete
+	 */
+	public void delete(String id) throws Exception {
+		ArrayList<Member> memberList = this.readFile();
+		for (int i = 0; i < memberList.size(); i++) {
+			if (memberList.get(i).getId().equals(id)) {
+				memberList.remove(i);
+				this.writeFile(memberList);
+				break;
+			}
+		}
+
+	}
+}

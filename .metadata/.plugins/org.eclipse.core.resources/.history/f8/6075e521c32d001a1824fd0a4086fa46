@@ -1,0 +1,11 @@
+
+public class OuterClass {
+	public int outer_member_field;
+	public void outer_member_method() {
+		System.out.println("outer_member_method()");
+	}
+	public class InnerClass{
+		
+	}
+
+}

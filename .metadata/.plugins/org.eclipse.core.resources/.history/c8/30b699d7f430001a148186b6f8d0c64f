@@ -1,0 +1,11 @@
+package chat.client;
+
+import java.net.Socket;
+
+public class ServerTestMain {
+	public static void main(String[] args) {
+		Socket s = new Socket("192.168.15.31",1987);
+		
+	}
+
+}

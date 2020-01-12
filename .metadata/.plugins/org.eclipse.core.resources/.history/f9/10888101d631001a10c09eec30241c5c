@@ -1,0 +1,17 @@
+package statement;
+
+public class StatementMain {
+
+	public static void main(String[] args) {
+		String driverClass="oracle.jdbc.OracleDriver";
+		String url="jdbc:oracle:thin:@182.237.126.19:1521:XE";
+		String user="javaspring20";
+		String password="javaspring20";
+		
+		String selectSql = "select * from emp order by sal desc";
+		String updateSql = "update emp set sal=9000 where empno=7369";
+		
+
+	}
+
+}

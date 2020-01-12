@@ -1,0 +1,20 @@
+package dao.dept;
+
+public class DeptSQL {
+	public static final String DEPT_INSERT =
+			"insert into dept values(dept_no_seq.nextval,?,?)";
+	public static final String DEPT_UPDATE =
+			"update dept set dname=?, loc=?";
+	public static final String DEPT_DELETE =
+			"delete from dept where deptno=?";
+	public static final String DEPT_FIND_DNAME =
+			"select * from dept where dname=?";
+	public static final String DEPT_FIND_LOC =
+			"select * from dept where loc=?";
+	public static final String DEPT_FIND_NO =
+			"select * from dept where deptno=?";
+	public static final String DEPT_FIND_ALL =
+			"select * from dept";
+	
+
+}

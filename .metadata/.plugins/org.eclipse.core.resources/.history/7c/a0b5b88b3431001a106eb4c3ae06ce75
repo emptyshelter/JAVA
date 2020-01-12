@@ -1,0 +1,228 @@
+package com.itwill.member.ui;
+
+import java.awt.BorderLayout;
+import java.awt.EventQueue;
+
+import javax.swing.JFrame;
+import javax.swing.JPanel;
+import javax.swing.border.EmptyBorder;
+
+import com.itwill.member.Member;
+import com.itwill.member.MemberService;
+
+import javax.swing.JTabbedPane;
+import javax.swing.JButton;
+import java.awt.event.ActionListener;
+import java.util.ArrayList;
+import java.awt.event.ActionEvent;
+import javax.swing.JTextField;
+import javax.swing.JLabel;
+import javax.swing.JOptionPane;
+import javax.swing.JScrollPane;
+import javax.swing.JTextArea;
+import javax.swing.JCheckBox;
+
+public class MemberFrame extends JFrame {
+
+	private JPanel contentPane;
+	private JTextField idTF;
+	private JTextField pwTF;
+	private MemberService memberservice;
+	private JTextField joinIdTF;
+	private JTextField nameTF;
+	private JTextField ageTF;
+	private JTextField passwordTF;
+	private JTextField addressTF;
+	private JTextArea listTA;
+
+	/**
+	 * Launch the application.
+	 */
+	public static void main(String[] args) {
+		EventQueue.invokeLater(new Runnable() {
+			public void run() {
+				try {
+					MemberFrame frame = new MemberFrame();
+					frame.setVisible(true);
+				} catch (Exception e) {
+					e.printStackTrace();
+				}
+			}
+		});
+	}
+
+	/**
+	 * Create the frame.
+	 */
+	public MemberFrame() {
+		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+		setBounds(100, 100, 450, 300);
+		contentPane = new JPanel();
+		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
+		contentPane.setLayout(new BorderLayout(0, 0));
+		setContentPane(contentPane);
+		
+		JTabbedPane tabbedPane = new JTabbedPane(JTabbedPane.TOP);
+		contentPane.add(tabbedPane, BorderLayout.CENTER);
+		
+		JPanel loginP = new JPanel();
+		tabbedPane.addTab("login", null, loginP, null);
+		loginP.setLayout(null);
+		
+		JButton btnLogIn = new JButton("log in");
+		btnLogIn.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				String id = idTF.getText();
+				String pw = pwTF.getText();
+				try {
+					int login = 0;
+					login = memberservice.login(id, pw);
+					if (login== 0) {
+						setTitle(id+" 님 로그인 성공");
+						tabbedPane.setEnabledAt(2,true);
+						tabbedPane.setSelectedIndex(2);
+						tabbedPane.setEnabledAt(0, false);
+						tabbedPane.setEnabledAt(1, false);
+					}else if (login == 1) {
+						System.out.println("아이디존재하지 않습니다.");
+					}else if (login == 2) {
+						System.out.println("비밀번호 오류입니다.");
+					} 
+				} catch (Exception e1) {
+					// TODO Auto-generated catch block
+					e1.printStackTrace();
+				}
+			}
+		});
+		btnLogIn.setBounds(144, 160, 97, 23);
+		loginP.add(btnLogIn);
+		
+		idTF = new JTextField();
+		idTF.setBounds(144, 57, 116, 21);
+		loginP.add(idTF);
+		idTF.setColumns(10);
+		
+		pwTF = new JTextField();
+		pwTF.setBounds(144, 101, 116, 21);
+		loginP.add(pwTF);
+		pwTF.setColumns(10);
+		
+		JLabel lblNewLabel = new JLabel("ID:");
+		lblNewLabel.setBounds(64, 60, 57, 15);
+		loginP.add(lblNewLabel);
+		
+		JLabel lblNewLabel_1 = new JLabel("Password:");
+		lblNewLabel_1.setBounds(64, 104, 68, 15);
+		loginP.add(lblNewLabel_1);
+		
+		JPanel joinP = new JPanel();
+		tabbedPane.addTab("join", null, joinP, null);
+		joinP.setLayout(null);
+		
+		JButton joinB = new JButton("join");
+		joinB.setBounds(149, 190, 97, 23);
+		joinP.add(joinB);
+		
+		joinIdTF = new JTextField();
+		joinIdTF.setBounds(78, 28, 116, 21);
+		joinP.add(joinIdTF);
+		joinIdTF.setColumns(10);
+		
+		nameTF = new JTextField();
+		nameTF.setBounds(78, 81, 116, 21);
+		joinP.add(nameTF);
+		nameTF.setColumns(10);
+		
+		ageTF = new JTextField();
+		ageTF.setBounds(78, 133, 116, 21);
+		joinP.add(ageTF);
+		ageTF.setColumns(10);
+		
+		passwordTF = new JTextField();
+		passwordTF.setBounds(275, 28, 116, 21);
+		joinP.add(passwordTF);
+		passwordTF.setColumns(10);
+		
+		addressTF = new JTextField();
+		addressTF.setBounds(275, 81, 116, 21);
+		joinP.add(addressTF);
+		addressTF.setColumns(10);
+		
+		JLabel passwordL = new JLabel("password");
+		passwordL.setBounds(206, 31, 57, 15);
+		joinP.add(passwordL);
+		
+		JLabel addressL = new JLabel("address");
+		addressL.setBounds(206, 84, 57, 15);
+		joinP.add(addressL);
+		
+		JLabel marriedL = new JLabel("married");
+		marriedL.setBounds(206, 136, 57, 15);
+		joinP.add(marriedL);
+		
+		JLabel idL = new JLabel("id");
+		idL.setBounds(9, 31, 57, 15);
+		joinP.add(idL);
+		
+		JLabel nameL = new JLabel("name");
+		nameL.setBounds(9, 84, 57, 15);
+		joinP.add(nameL);
+		
+		JLabel ageL = new JLabel("age");
+		ageL.setBounds(9, 136, 57, 15);
+		joinP.add(ageL);
+		
+		JCheckBox marriedTrue = new JCheckBox("true");
+		marriedTrue.setBounds(275, 132, 115, 23);
+		joinP.add(marriedTrue);
+		
+		JPanel listP = new JPanel();
+		tabbedPane.addTab("list", null, listP, null);
+		tabbedPane.setEnabledAt(2, true);
+		listP.setLayout(null);
+		
+		JButton nameB = new JButton("name");
+		nameB.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				String memberNameStr= JOptionPane.showInputDialog(null,
+						"이름을 입력하세요",
+						"이름",
+						JOptionPane.INFORMATION_MESSAGE);
+				try {
+					ArrayList<Member> findMember = 
+							memberservice.findMemberByName(memberNameStr);
+					String findName = "";
+					for (Member member : findMember) {
+						findName += findMember.toString()+"\n";
+						if (memberNameStr==null) {
+							JOptionPane.showMessageDialog(null,
+									memberNameStr+" 계좌객체없네용!!!");
+							return;
+						}
+					}
+					listTA.setText(findName.toString()+"\n");
+				} catch (Exception e1) {
+					e1.printStackTrace();
+				}
+			
+			}
+		});
+		nameB.setBounds(12, 190, 97, 23);
+		listP.add(nameB);
+		
+		JButton addressB = new JButton("address");
+		addressB.setBounds(166, 190, 97, 23);
+		listP.add(addressB);
+		
+		JButton ageB = new JButton("age");
+		ageB.setBounds(310, 190, 97, 23);
+		listP.add(ageB);
+		
+		JScrollPane scrollPane = new JScrollPane();
+		scrollPane.setBounds(12, 10, 395, 170);
+		listP.add(scrollPane);
+		
+		listTA = new JTextArea();
+		scrollPane.setViewportView(listTA);
+	}
+}

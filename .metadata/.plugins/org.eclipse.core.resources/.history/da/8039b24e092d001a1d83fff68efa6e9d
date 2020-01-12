@@ -1,0 +1,10 @@
+package basic;
+
+import java.awt.Frame;
+
+public class ChildFrame extends Frame{
+	public ChildFrame() {
+		
+	}
+
+}

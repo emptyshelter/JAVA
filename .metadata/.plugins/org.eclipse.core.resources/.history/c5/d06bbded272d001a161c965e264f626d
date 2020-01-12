@@ -1,0 +1,31 @@
+package layout;
+
+import java.awt.Frame;
+import java.awt.GridLayout;;
+
+public class GridLayoutFrame extends Frame {
+	public GridLayoutFrame() {
+		GridLayout gl = new GridLayout(4,4);
+		setLayout();
+		setSize(300,400);
+		setVisible(true);
+		
+	
+	}
+
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	public static void main(String[] args) {
+		new GridLayoutFrame();
+
+	}
+
+}

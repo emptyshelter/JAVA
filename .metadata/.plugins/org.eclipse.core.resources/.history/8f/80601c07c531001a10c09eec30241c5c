@@ -1,0 +1,37 @@
+package basic;
+
+import java.sql.Connection;
+import java.sql.DriverManager;
+import java.sql.Statement;
+
+public class JDBCFlowMain {
+
+	public static void main(String[] args) throws Exception {
+		String driverClass = "oracle.jdbc.OracleDriver";
+		String url = "jdbc:oracle:thin:@182.237.126.19:1521:xe";
+		String user="javaspring20";
+		String password="javaspring20";
+		/*
+		 * 1. oracle.jdbc.OracleDriver class loading
+		 * 		A. Driver 按眉积己
+		 * 		B. DriverManager俊 按眉 殿废		 
+		 */
+		Class.forName(driverClass);
+		System.out.println("1. Driver Class Loading");
+		/*
+		 * 2. Connection 积己
+		 */
+		Connection con = DriverManager.getConnection(url,user,password);
+		System.out.println("2. Connection 积己"+ con);
+		/*
+		 * 3.Statement 积己(Stream)
+		 */
+		Statement stmt = con.createStatement();
+		System.out.println("3. Statement 积己:"+stmt);
+		/*
+		 * 4-1. SQL巩 傈价
+		 */
+
+	}
+
+}

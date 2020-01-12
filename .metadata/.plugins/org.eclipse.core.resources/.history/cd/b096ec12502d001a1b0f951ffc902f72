@@ -1,0 +1,43 @@
+package layout;
+
+import java.awt.BorderLayout;
+import java.awt.Button;
+import java.awt.Color;
+import java.awt.FlowLayout;
+import java.awt.Frame;
+import java.awt.List;
+import java.awt.Panel;
+import java.awt.TextArea;
+
+import javax.swing.border.Border;
+
+public class Chatting extends Frame {
+	Panel southP;
+	Panel centerP;
+	Panel northP;
+	Button sb1,sb2,sb3,sb4;
+	Button nb1,nb2,nb3,nb4;
+	List cList;
+	TextArea cTextArea;
+	
+	public Chatting() {
+		setLayout(new BorderLayout());
+		setSize(300, 400);
+		
+		
+		/**************north panel***************/
+		northP = new Panel();
+		northP.setBackground(Color.ORANGE);
+		northP.setLayout(new FlowLayout());
+		
+	}
+	
+	
+	
+	
+	public static void main(String[] args) {
+		new Chatting();
+		
+	}
+
+}

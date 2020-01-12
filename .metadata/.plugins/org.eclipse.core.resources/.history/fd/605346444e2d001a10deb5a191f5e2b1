@@ -1,0 +1,83 @@
+package layout;
+
+import java.awt.BorderLayout;
+import java.awt.Button;
+import java.awt.FlowLayout;
+import java.awt.Frame;
+import java.awt.GridLayout;
+import java.awt.Panel;
+import java.awt.TextArea;
+
+public class Calculator extends Frame{
+	Panel northP;
+	Panel centerP;
+	Button b1,b2,b3,b4,b5,b6,b7,b8,b9,b0,
+		   plusB,minusB,mulB,divB,equalB,resetB;
+	TextArea nTextArea;
+	
+	
+	public Calculator() {
+		setTitle("Calculator");
+		setSize(500,600);
+		setVisible(true);
+		this.setLayout(new BorderLayout());
+		northP = new Panel();
+		centerP= new Panel();
+		northP.setLayout(new FlowLayout());
+		centerP.setLayout(new GridLayout(4,4,5,5));
+		
+		this.add(northP,BorderLayout.NORTH);
+		this.add(centerP,BorderLayout.CENTER);
+		
+		
+		/****************northP*********************/
+		
+		nTextArea = new TextArea();
+		nTextArea.setText("34");
+		northP.add(nTextArea);
+		
+		/****************centerP*********************/
+		
+		b1 = new Button("1");
+		b2 = new Button("2");
+		b3 = new Button("3");
+		b4 = new Button("4");
+		b5 = new Button("5");
+		b6 = new Button("6");
+		b7 = new Button("7");
+		b8 = new Button("8");
+		b9 = new Button("9");
+		b0 = new Button("0");
+		plusB = new Button("+");
+		minusB = new Button("-");
+		mulB = new Button("X");
+		divB = new Button("/");
+		equalB = new Button("=");
+		resetB = new Button("C");
+
+		
+		centerP.add(b1);
+		centerP.add(b2);
+		centerP.add(b3);
+		centerP.add(plusB);
+		centerP.add(b4);
+		centerP.add(b5);
+		centerP.add(b6);
+		centerP.add(minusB);
+		centerP.add(b7);
+		centerP.add(b8);
+		centerP.add(b9);
+		centerP.add(mulB);
+		centerP.add(b0);
+		centerP.add(equalB);
+		centerP.add(resetB);
+		centerP.add(divB);
+	}
+	
+	
+	public static void main(String[] args) {
+		new Calculator();
+		
+	}
+
+}

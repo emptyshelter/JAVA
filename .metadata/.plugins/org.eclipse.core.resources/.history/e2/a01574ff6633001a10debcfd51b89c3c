@@ -1,0 +1,6 @@
+package dao.guest;
+
+public class Guest {
+	
+
+}

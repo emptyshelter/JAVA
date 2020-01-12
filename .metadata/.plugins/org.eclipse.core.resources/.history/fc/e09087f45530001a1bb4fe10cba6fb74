@@ -1,0 +1,98 @@
+package server;
+
+import java.awt.BorderLayout;
+import java.awt.EventQueue;
+
+import javax.swing.JFrame;
+import javax.swing.JPanel;
+import javax.swing.border.EmptyBorder;
+import javax.swing.JScrollPane;
+import javax.swing.JTextArea;
+import java.awt.Color;
+import java.awt.Font;
+import java.io.IOException;
+import java.net.ServerSocket;
+import java.net.Socket;
+
+public class DayTimeServerFrame extends JFrame {
+
+	private JPanel contentPane;
+	private JTextArea displayTA;
+
+	/**
+	 * Launch the application.
+	 */
+	public static void main(String[] args) {
+		EventQueue.invokeLater(new Runnable() {
+			public void run() {
+				try {
+					DayTimeServerFrame frame = new DayTimeServerFrame();
+					frame.setVisible(true);
+				} catch (Exception e) {
+					e.printStackTrace();
+				}
+			}
+		});
+		
+	}
+
+	/**
+	 * Create the frame.
+	 */
+	public DayTimeServerFrame() {
+		setTitle("DayTimeServer");
+		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+		setBounds(100, 100, 537, 404);
+		contentPane = new JPanel();
+		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
+		contentPane.setLayout(new BorderLayout(0, 0));
+		setContentPane(contentPane);
+		
+		JScrollPane scrollPane = new JScrollPane();
+		contentPane.add(scrollPane, BorderLayout.CENTER);
+		
+		displayTA = new JTextArea();
+		displayTA.setFont(new Font("D2Coding", Font.BOLD, 16));
+		displayTA.setText("monitoring...\r\n");
+		displayTA.setForeground(Color.WHITE);
+		displayTA.setBackground(Color.DARK_GRAY);
+		displayTA.setEditable(false);
+		scrollPane.setViewportView(displayTA);
+	}//end constructor 
+	private void displayLog(String log) {
+		displayTA.append(log+"\n");
+	}
+	/***********************DayTimeServerThread**************************/
+	public class DayTimeServerThread extends Thread{
+		@Override
+		public void run() {
+			try {
+				ServerSocket serverSocket=new ServerSocket(8000);
+				displayLog("0.DayTimeServerThread:ServerSocker생성(8000)");
+				while (true) {
+					displayLog("1.DayTimeServerThread: 클라이언트 연결 요청대기(쓰레드대기)");
+					Socket socket = serverSocket.accept();
+					displayLog("2.DayTimeServerThread: 클라이언트와 연결된 서버쪽 소켓생성"+socket);
+				}
+			} catch (IOException e) {
+				
+			}
+				
+				
+		}
+	}
+	/*************************************************/
+}//end class
+
+
+
+
+
+
+
+
+
+
+
+
+

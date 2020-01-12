@@ -1,0 +1,9 @@
+package basic;
+
+public class ChildFrameMain {
+
+	public static void main(String[] args) {
+
+	}
+
+}

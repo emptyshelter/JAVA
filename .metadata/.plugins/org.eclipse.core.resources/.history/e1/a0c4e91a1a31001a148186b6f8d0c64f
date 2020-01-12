@@ -1,0 +1,28 @@
+package web;
+
+import java.io.OutputStreamWriter;
+import java.io.PrintWriter;
+import java.net.ServerSocket;
+import java.net.Socket;
+
+public class WbeServerMain {
+
+	public static void main(String[] args) throws Exception{
+		
+		ServerSocket serverSocket = new ServerSocket(87);
+		System.out.println("1. WebServer 1987포트를 열고 클라이언트 요청대기처리");
+		while (true) {
+			Socket socket = serverSocket.accept();
+			PrintWriter out = 
+					new PrintWriter(
+							new OutputStreamWriter(
+									socket.getOutputStream()));
+			System.out.println("2. WebServer 클라이언트에 html 전송");
+			out.println("<h1>Hellow Servlet!!!<h1>");
+			out.flush();
+			socket.close();
+		}
+
+	}
+
+}

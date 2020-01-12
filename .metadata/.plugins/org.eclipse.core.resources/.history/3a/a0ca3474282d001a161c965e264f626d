@@ -1,0 +1,52 @@
+package layout;
+
+import java.awt.Button;
+import java.awt.Frame;
+import java.awt.GridLayout;;
+
+public class GridLayoutFrame extends Frame {
+	
+	Button b1,b2,b3,b4,b5,b6,b7,b8,b9,
+		   b0,plusB,minusB,mulB,divB,
+		   equalB,resetB;
+	public GridLayoutFrame() {
+		b1 = new Button();
+		b2 = new Button();
+		b3 = new Button();
+		b4 = new Button();
+		b5 = new Button();
+		b6 = new Button();
+		b7 = new Button();
+		b8 = new Button();
+		b9 = new Button();
+		b0 = new Button();
+		plusB = new Button();
+		minusB = new Button();
+		mulB = new Button();
+		divB = new Button();
+		equalB = new Button();
+		resetB = new Button();
+		GridLayout gl = new GridLayout(4,4);
+		setLayout(gl);
+		setSize(300,400);
+		setVisible(true);
+		
+	
+	}
+
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	public static void main(String[] args) {
+		new GridLayoutFrame();
+
+	}
+
+}

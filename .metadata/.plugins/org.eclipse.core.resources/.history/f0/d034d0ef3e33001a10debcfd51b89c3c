@@ -1,0 +1,148 @@
+package com.itwill.account;
+
+import java.sql.Connection;
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
+import java.util.ArrayList;
+
+import com.itwill.account.factory.AccountFactory;
+
+public class AccountDaoDBImpl implements AccountDao {
+	
+	
+	@Override
+	public void create(Account account) throws Exception {
+		String createSql = "insert into Account values(?,?,?,?)";
+		Connection con = AccountFactory.getConnection();
+		PreparedStatement pstmt = con.prepareStatement(createSql);
+		pstmt.setInt(1, account.getNo());
+		pstmt.setString(2, account.getOwner());
+		pstmt.setInt(3, account.getBalance());
+		pstmt.setDouble(4, account.getIyul());
+		int result = pstmt.executeUpdate();
+		System.out.println(result+"개의 데이터가 생성되었습니다.");
+	}
+
+	@Override
+	public boolean isDuplicateNo(int no) throws Exception {
+		String checkNo = "select count(*) as count form Account where no=?";
+		Connection con = AccountFactory.getConnection();
+		PreparedStatement pstmt = con.prepareStatement(checkNo);
+		pstmt.setInt(1, no);
+		ResultSet rs = pstmt.executeQuery();
+		rs.next();
+		if (rs.getInt("count")==0) {
+			return true;
+		}else {
+			return false;
+		}
+	}
+
+	@Override
+	public ArrayList<Account> readAll() throws Exception {
+		ArrayList<Account> accountList = new ArrayList<Account>();
+		String readAll = "select * from account";
+		Connection con = AccountFactory.getConnection();
+		PreparedStatement pstmt = con.prepareStatement(readAll);
+		ResultSet rs = pstmt.executeQuery();
+		while (rs.next()) {
+			Account findAll = new Account(rs.getInt("NO"), 
+										  rs.getString("OWNER"), 
+										  rs.getInt("BALANCE"), 
+										  rs.getDouble("IYUL"));
+			accountList.add(findAll);
+		}
+		return accountList;
+	}
+
+	@Override
+	public Account readOne(int no) throws Exception {
+		Account findNo = null;
+		String readOne = "select *from where no=?";
+		Connection con = AccountFactory.getConnection();
+		PreparedStatement pstmt = con.prepareStatement(readOne);
+		pstmt.setInt(1, no);
+		ResultSet rs = pstmt.executeQuery();
+		while(rs.next()) {
+			findNo = new Account(rs.getInt("NO"), 
+					  			  rs.getString("OWNER"), 
+					  			  rs.getInt("BALANCE"), 
+					  			  rs.getDouble("IYUL"));
+		}
+		return findNo;
+	}
+
+	@Override
+	public void update(Account updateAccount) throws Exception {
+		String updateAcc = "update Account set owner=?, balance=?, iyul=?";
+		Connection con = AccountFactory.getConnection();
+		PreparedStatement pstmt = con.prepareStatement(updateAcc);
+		pstmt.setString(1, updateAccount.getOwner());
+		pstmt.setInt(2, updateAccount.getBalance());
+		pstmt.setDouble(3, updateAccount.getIyul());
+		pstmt.executeUpdate();
+	}
+
+	@Override
+	public void delete(int no) throws Exception {
+		String deleteAcc = "delete Account where no=?";
+		Connection con = AccountFactory.getConnection();
+		PreparedStatement pstmt = con.prepareStatement(deleteAcc);
+		pstmt.setInt(1, no);
+		pstmt.executeUpdate();
+		
+	}
+
+	@Override
+	public ArrayList<Account> readName(String name) throws Exception {
+		ArrayList<Account> accountList = new ArrayList<Account>();
+		String readOne = "select *from where owner=?";
+		Connection con = AccountFactory.getConnection();
+		PreparedStatement pstmt = con.prepareStatement(readOne);
+		pstmt.setString(1, name);
+		ResultSet rs = pstmt.executeQuery();
+		while(rs.next()) {
+			Account findName = new Account(rs.getInt("NO"), 
+					  			  		   rs.getString("OWNER"), 
+					  			  		   rs.getInt("BALANCE"), 
+					  			  		   rs.getDouble("IYUL"));
+			accountList.add(findName);
+		}
+		return accountList;
+	}
+	
+
+	@Override
+	public ArrayList<Account> readBalance(int balance) throws Exception {
+		ArrayList<Account> accountList = new ArrayList<Account>();
+		String readOne = "select *from where no=?";
+		Connection con = AccountFactory.getConnection();
+		PreparedStatement pstmt = con.prepareStatement(readOne);
+		pstmt.setInt(1, balance);;
+		ResultSet rs = pstmt.executeQuery();
+		while(rs.next()) {
+			Account findName = new Account(rs.getInt("NO"), 
+					  			  		   rs.getString("OWNER"), 
+					  			  		   rs.getInt("BALANCE"), 
+					  			  		   rs.getDouble("IYUL"));
+			accountList.add(findName);
+		}
+		return accountList;
+	}
+
+	@Override
+	public ArrayList<Account> readIyul(double iyul) throws Exception {
+		return null;
+	}
+
+	@Override
+	public Account ipGum(int no, int money) {
+		return null;
+	}
+
+	@Override
+	public Account chulGum(int no, int money) throws InsufficientBalanceException {
+		return null;
+	}
+
+}

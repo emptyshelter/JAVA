@@ -1,0 +1,25 @@
+package com.itwill.account;
+
+import java.sql.Connection;
+import java.sql.PreparedStatement;
+
+public class AccountDao2 {
+	public void create(Account account) throws Exception {
+		
+		Connection con = AccountFactory.getConnection();
+		PreparedStatement pstmt = con.prepareStatement(account);
+	}
+	public void readAll() {
+		
+	}
+	public void readOne() {
+		
+	}
+	public void update() {
+		
+	}
+	public void delete() {
+		
+	}
+
+}

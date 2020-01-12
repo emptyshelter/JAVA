@@ -1,0 +1,19 @@
+package dao.address;
+/*
+이름      널?       유형           
+------- -------- ------------ 
+NO      NOT NULL NUMBER(4)    
+ID               VARCHAR2(20) 
+NAME             VARCHAR2(20) 
+PHONE            VARCHAR2(15) 
+ADDRESS          VARCHAR2(60) 
+ */
+/*
+ *  주소록객체를 추상화한클래스
+ * DTO(Data Transfer Object)객체,도메인객체
+ *   -  1개의  주소록데이타를 가지고있는 객체
+ *   -  Address DB 테이블 한개 row
+ */
+public class Address {
+	
+}

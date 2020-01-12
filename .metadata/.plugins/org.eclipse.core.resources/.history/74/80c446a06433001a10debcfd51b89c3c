@@ -1,0 +1,25 @@
+- 프로젝트이름 선정
+- 패키지정의 
+- VO(DTO)클래스정의
+
+1. 화면정의서에있는 화면 입출력 정보를 분류한후에
+2. VO(Value Object),DTO(Data Transfer Object) 클래스작성
+3. VO 클래스의 멤버필드를 정의한다.
+4. VO 클래스의 멤버필드중에 한개의 객체(레코드)를 구분할수있는 
+   유일한멤버필드를 선정(존재하지않으면 int로 번호필드생성)
+3. 생성자,getter,setter 메쏘드작성 ,toString
+
+ex>
+public class Member{
+	/*
+	회원번호	int	
+	회원이름	String	
+	전화번호	String	
+	회원주소	String	
+	면허타입	char	
+	면허번호	no	
+	취득일자	Date	
+	*/
+}
+ 
+

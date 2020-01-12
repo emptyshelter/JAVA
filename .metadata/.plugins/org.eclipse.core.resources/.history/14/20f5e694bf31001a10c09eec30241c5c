@@ -1,0 +1,14 @@
+package basic;
+
+public class JDBCFlowMain {
+
+	public static void main(String[] args) {
+		String driverClass ="oracle.jdbc.OracleDriver";
+		/*
+		 * 1. oracle.jdbc.OracleDriver class loading
+		 */
+		Class.forName(driverClass);
+
+	}
+
+}

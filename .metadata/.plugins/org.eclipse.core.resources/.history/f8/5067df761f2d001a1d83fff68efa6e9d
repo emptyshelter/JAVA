@@ -1,0 +1,11 @@
+package layout;
+
+import java.awt.Frame;
+
+public class BorderLayoutFrame extends Frame{
+
+	public static void main(String[] args) {
+
+	}
+
+}

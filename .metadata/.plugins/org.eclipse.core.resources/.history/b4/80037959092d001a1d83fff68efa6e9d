@@ -1,0 +1,14 @@
+package basic;
+
+import java.awt.Color;
+
+public class ChildFrameMain {
+
+	public static void main(String[] args) {
+		ChildFrame cf = new ChildFrame();
+		
+		
+
+	}
+
+}

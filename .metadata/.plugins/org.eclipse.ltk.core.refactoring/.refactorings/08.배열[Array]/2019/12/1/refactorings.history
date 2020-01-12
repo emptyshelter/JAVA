@@ -1,0 +1,4 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<session version="1.0">
+<refactoring comment="Copy element &apos;AccountArrayMain.java&apos; to &apos;22.입출력[IO]/src/byte_stream.filter_stream&apos;&#x0D;&#x0A;- Original project: &apos;08.배열[Array]&apos;&#x0D;&#x0A;- Destination element: &apos;22.입출력[IO]/src/byte_stream.filter_stream&apos;&#x0D;&#x0A;- Original element: &apos;AccountArrayMain.java&apos;" description="Copy compilation unit" destination="=22.입출력\[IO\]/src&lt;byte_stream.filter_stream" element1="/src&lt;{AccountArrayMain.java" files="0" flags="589830" folders="0" id="org.eclipse.jdt.ui.copy" policy="org.eclipse.jdt.ui.copyResources" stamp="1577688799079" units="1" version="1.0"/>
+</session>

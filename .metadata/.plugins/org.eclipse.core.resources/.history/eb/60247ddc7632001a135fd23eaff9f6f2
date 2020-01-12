@@ -1,0 +1,78 @@
+import java.awt.BorderLayout;
+import java.awt.EventQueue;
+
+import javax.swing.JFrame;
+import javax.swing.JPanel;
+import javax.swing.border.EmptyBorder;
+import javax.swing.JScrollPane;
+import javax.swing.JTextField;
+import javax.swing.JLabel;
+import javax.swing.JButton;
+import javax.swing.JTextArea;
+import java.awt.Font;
+import java.awt.event.ActionListener;
+import java.awt.event.ActionEvent;
+
+public class ChatFrame extends JFrame {
+
+	private JPanel contentPane;
+	private JTextField chatTF;
+	private JTextArea chatTA;
+
+	/**
+	 * Launch the application.
+	 */
+	public static void main(String[] args) {
+		EventQueue.invokeLater(new Runnable() {
+			public void run() {
+				try {
+					ChatFrame frame = new ChatFrame();
+					frame.setVisible(true);
+				} catch (Exception e) {
+					e.printStackTrace();
+				}
+			}
+		});
+	}
+
+	/**
+	 * Create the frame.
+	 */
+	public ChatFrame() {
+		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+		setBounds(100, 100, 450, 300);
+		contentPane = new JPanel();
+		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
+		setContentPane(contentPane);
+		contentPane.setLayout(new BorderLayout(0, 0));
+		
+		JPanel panel = new JPanel();
+		contentPane.add(panel, BorderLayout.SOUTH);
+		
+		chatTF = new JTextField();
+		chatTF.setFont(new Font("D2Coding", Font.PLAIN, 14));
+		panel.add(chatTF);
+		chatTF.setColumns(45);
+		
+		JButton sendB = new JButton("send");
+		sendB.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+			}
+		});
+		panel.add(sendB);
+		
+		JScrollPane scrollPane = new JScrollPane();
+		contentPane.add(scrollPane, BorderLayout.CENTER);
+		
+		chatTA = new JTextArea();
+		scrollPane.setViewportView(chatTA);
+	}
+	private void send() {
+		String sendStr = chatTF.getText();
+		if (sendStr==null || sendStr.equals("")) {
+			return;
+		}
+		chatTA.append("±è¹ÎÅÂ:"+sendStr+"\n");
+		chatTF.setText("");
+	}
+}

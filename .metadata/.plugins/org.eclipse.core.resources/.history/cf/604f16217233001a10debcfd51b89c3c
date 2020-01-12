@@ -1,0 +1,7 @@
+package dao.dept;
+
+public class EmpSQL {
+	public static final String SELECT_ALLEMP_WITHDEPT= 
+			"select empno,ename,job, mgr, hiredate, sal,comm, e.deptno,dname,loc from emp e full outer join dept d on e.deptno = d.deptno";
+
+}

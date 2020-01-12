@@ -1,0 +1,9 @@
+package layout;
+
+public class ChattingFrame {
+
+	public static void main(String[] args) {
+
+	}
+
+}

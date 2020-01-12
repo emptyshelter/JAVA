@@ -1,0 +1,81 @@
+package client;
+
+import java.awt.BorderLayout;
+import java.awt.EventQueue;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
+import java.io.IOException;
+import java.io.InputStream;
+import java.io.OutputStream;
+import java.net.Socket;
+
+import javax.swing.JFrame;
+import javax.swing.JPanel;
+import javax.swing.border.EmptyBorder;
+import javax.swing.JTextField;
+import javax.swing.JEditorPane;
+import javax.swing.JScrollPane;
+
+public class WebClientFrame extends JFrame {
+
+	private JPanel contentPane;
+	private JTextField addressTF;
+	private JScrollPane scrollPane;
+	private JEditorPane editorPane;
+
+	/**
+	 * Launch the application.
+	 */
+	public static void main(String[] args) {
+		EventQueue.invokeLater(new Runnable() {
+			public void run() {
+				try {
+					WebClientFrame frame = new WebClientFrame();
+					frame.setVisible(true);
+				} catch (Exception e) {
+					e.printStackTrace();
+				}
+			}
+		});
+	}
+
+	/**
+	 * Create the frame.
+	 */
+	public WebClientFrame() {
+		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+		setBounds(100, 100, 450, 300);
+		contentPane = new JPanel();
+		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
+		contentPane.setLayout(new BorderLayout(0, 0));
+		setContentPane(contentPane);
+		
+		addressTF = new JTextField();
+		addressTF.addActionListener(new ActionListener() {
+			
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				try {
+					String hostStr = addressTF.getText();
+					Socket socket = new Socket(hostStr,80);
+					OutputStream out = socket.getOutputStream();
+					InputStream in = socket.getInputStream();
+					String requestStr = "GET / HTTP/1.1\r\n\r\n";
+					out.write(requestStr.getBytes());
+				} catch (IOException e1) {
+					
+				}
+			}
+		});
+		contentPane.add(addressTF, BorderLayout.NORTH);
+		addressTF.setColumns(10);
+		
+		scrollPane = new JScrollPane();
+		contentPane.add(scrollPane, BorderLayout.CENTER);
+		
+		editorPane = new JEditorPane();
+		editorPane.setContentType("text/html");
+		scrollPane.setViewportView(editorPane);
+	}
+
+}

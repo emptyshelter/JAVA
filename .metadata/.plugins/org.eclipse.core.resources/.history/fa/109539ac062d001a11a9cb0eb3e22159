@@ -1,0 +1,10 @@
+package basic;
+
+import java.awt.Frame;
+
+public class FrameMain {
+	public static void main(String[] args) {
+		Frame f = new Frame();
+	}
+
+}

@@ -1,0 +1,16 @@
+package basic;
+
+public class OracleDriverClassLoadingMain {
+
+	public static void main(String[] args) throws Exception {
+		String driverClass = "basic.OracleDriver";
+		/*
+		 * 1. basic.OracleDriver class loading
+		 */
+		//Driver driver = new OracleDriver();
+		Class clazz = Class.forName(driverClass);//의존성을 줄이기 위해서
+		Driver driver = clazz.newInstance();
+	
+	}
+
+}

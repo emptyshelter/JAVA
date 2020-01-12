@@ -1,0 +1,22 @@
+
+public class OuterClass {
+	public int outer_member_field;
+	public void outer_member_method() {
+		System.out.println("outer_member_method()");
+	}
+	  
+	/*******************Nested Class***********************/
+	/*
+	 * InnerClass의 사용이유 
+	 * 	- 내부클래스(객체)에서 외부클래스(객체)의 멤버접근
+	 * 	  쉽게 하기 위해
+	 */
+	public class InnerClass{
+		public int inner_member_field;
+		public void inner_member_method(){
+			System.out.println("inner_member_method()");
+		}
+	}
+	/**********************************************/
+
+}

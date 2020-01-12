@@ -1,0 +1,21 @@
+package layout;
+
+import java.awt.Frame;
+
+public class NullLayoutFrame extends Frame{
+	public NullLayoutFrame() {
+		setTitle("郴何何何郴何");
+		setSize(300, 250);
+		setVisible(true);
+	}
+	
+	
+	
+	
+	
+	
+	public static void main(String[] args) {
+		new NullLayoutFrame();
+	}
+
+}

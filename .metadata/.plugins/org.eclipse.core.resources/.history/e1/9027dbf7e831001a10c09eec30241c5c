@@ -1,0 +1,9 @@
+package dao.address;
+
+public class AddressTableCreateMain {
+
+	public static void main(String[] args) {
+
+	}
+
+}

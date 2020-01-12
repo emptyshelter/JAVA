@@ -1,0 +1,4 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<session version="1.0">
+<refactoring comment="Rename type &apos;event.Calculator&apos; to &apos;Calculator2&apos;&#x0D;&#x0A;- Original project: &apos;21.GUI[awt,swing]&apos;&#x0D;&#x0A;- Original element: &apos;event.Calculator&apos;&#x0D;&#x0A;- Renamed element: &apos;event.Calculator2&apos;&#x0D;&#x0A;- Update references to refactored element&#x0D;&#x0A;- Rename similarly named elements&#x0D;&#x0A;- Update textual occurrences in comments and strings" description="Rename type &apos;Calculator&apos;" flags="589830" id="org.eclipse.jdt.ui.rename.type" input="/src&lt;event{Calculator.java[Calculator" matchStrategy="1" name="Calculator2" qualified="false" references="true" similarDeclarations="true" stamp="1578269856514" textual="false" version="1.0"/>
+</session>
