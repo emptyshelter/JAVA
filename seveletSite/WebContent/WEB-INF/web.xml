@@ -16,6 +16,10 @@
   <servlet-mapping>
   	<servlet-name>gs</servlet-name>
   	<url-pattern>/gugudan.itwill</url-pattern>
+  	<url-pattern>/gugudan</url-pattern>
+  	<url-pattern>/gugudan.do</url-pattern>
+  	<url-pattern>/gugudan.daum</url-pattern>
+  	<url-pattern>/gugudan.nhn</url-pattern>
   </servlet-mapping>
   <welcome-file-list>
     <welcome-file>index.html</welcome-file>
