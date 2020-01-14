@@ -21,6 +21,7 @@ public class GugudanServlet extends HttpServlet {
 			for (int j = 2; j < 10; j++) {
 				out.print(j+" x "+i+" ="+(i*j)+"\t\t");
 			}
+			
 			out.println();
 		}
 	}
