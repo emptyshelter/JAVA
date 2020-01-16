@@ -9,6 +9,10 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import com.itwill.servlet.joindb.Join;
+import com.itwill.servlet.joindb.JoinDao;
+import com.itwill.servlet.joindb.JoinDaoImpl;
+
 /**
  * Servlet implementation class JoinServlet
  */
@@ -28,16 +32,24 @@ public class JoinServlet extends HttpServlet {
 		PrintWriter out=response.getWriter();
 		request.setCharacterEncoding("EUC-KR");
 		String id = request.getParameter("id");
-		String password = request.getParameter("password");
+		String password = request.getParameter("pass");
 		String name = request.getParameter("name");
 		String[] hobbies=request.getParameterValues("hobby");
 		String address = request.getParameter("addr");
 		String gender = request.getParameter("gender");
 		String job = request.getParameter("job");
-		if(id==null|| id.equals("")) {
+		if(id==null|| id.equals("")||password==null || password.equals("")) {
 			response.sendRedirect("05-03.form.html");
 			return;
 		}
+		JoinDao join = new JoinDaoImpl();
+		try {
+			join.insert(new Join(0, id, name, job, address, gender));
+		} catch (Exception e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		
 		out.println("<html>");
 		out.println("<head>");
 		out.println("<title>가입정보 확인</title>");
@@ -86,7 +98,7 @@ public class JoinServlet extends HttpServlet {
 		out.println("</table>");
 		out.println("<br/>");
 		out.println("<p bgcolor=\"#CCFF33\">");
-		out.println("<a href='http://www.naver.com/'><B> 시작하기 <B></a>");
+		out.println("<a href='http://www.naver.com/'><B> 시작하기 <B>&nbsp;&nbsp;&nbsp;&nbsp; </a>");
 		out.println("<a href='05-03.form.html'>다시작성하기 </a>");
 //		out.println("</center>");
 //		out.println("</body>");
